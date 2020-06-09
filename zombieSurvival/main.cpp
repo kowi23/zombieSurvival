@@ -2,6 +2,7 @@
 #include <cmath>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
+
 const float pi = M_PI;
 const int windowHight = 900;
 const int windowWidth = 1400;
@@ -16,19 +17,28 @@ public:
         this->setTexture(texture_guy);
         this->setOrigin(13,21);
         this->setPosition(400,300);
-
     }
-    void animate(sf::Vector2i &mousePosition){
+    void shooting(sf::Time elapsed){
+        static double reload = 0;
+
+        if(sf::Mouse::isButtonPressed(sf::Mouse::Left) && reload == 0){
+                //shoot
+                std::cout<<"shoot"<<std::endl;
+                reload += elapsed.asSeconds();
+         }
+        if(reload != 0){
+             reload += elapsed.asSeconds();
+             if(reload>gunSpeed){
+                 reload=0;
+             }
+        }
+    }
+    void moveing(sf::Vector2i &mousePosition){
         //player angle
         sf::Vector2f playerPosition = this->getPosition();
         double angle = atan((mousePosition.x-playerPosition.x)/(playerPosition.y-mousePosition.y))*180/pi;
 
-
         if(mousePosition.y>playerPosition.y){
-            if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
-            std::cout<<"player "<<playerPosition.x<<playerPosition.y<<std::endl;
-            std::cout<<"mouse "<<mousePosition.x<<mousePosition.y<<std::endl;
-            }
             if(mousePosition.x>playerPosition.x){
                 angle+=180;
             }else{
@@ -73,6 +83,7 @@ protected:
     std::string name_;
     double speed = 5;
     double max_speed_;
+    double gunSpeed = 0.7;
 };
 
 
@@ -81,6 +92,7 @@ int main() {
     // create the window
     sf::RenderWindow window(sf::VideoMode(windowWidth, windowHight), "My window");
     window.setFramerateLimit(60);
+    sf::Clock clock;
     // create some shapes
     sf::Texture texture_guy;
     if(!texture_guy.loadFromFile("player.png")) {
@@ -91,7 +103,8 @@ int main() {
 
     // run the program as long as the window is open
     while (window.isOpen()) {
-
+        //clock
+        sf::Time elapsed = clock.restart();
         // check all the window's events that were triggered since the last iteration of the loop
         sf::Event event;
         while (window.pollEvent(event)) {
@@ -101,7 +114,8 @@ int main() {
 
         }
             sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
-            player.animate(mousePosition);
+            player.moveing(mousePosition);
+            player.shooting(elapsed);
 
 
         // clear the window with black color

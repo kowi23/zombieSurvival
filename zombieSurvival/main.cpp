@@ -2,20 +2,22 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 
-class Player : public sf::CircleShape {
+class Player : public sf::Sprite {
 public:
     std::string name() { return name_; }
     int size() { return size_; }
     double speed(){return speed_;};
     double max_speed() { return max_speed_; }
 
-    Player(std::string name):name_(name){
-        this->setRadius(size_);
+    Player(sf::Texture &texture_guy){
+        this->setTexture(texture_guy);
+        this->setOrigin(13,21);
         this->setPosition(400,300);
-        this->setFillColor(sf::Color(100, 50, 250));
 
     }
     void animate(){
+        //sf::Vector2i position = sf::Mouse::getPosition();
+
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
             this->move(0,-4);
         }
@@ -45,7 +47,11 @@ int main() {
     sf::RenderWindow window(sf::VideoMode(1400, 900), "My window");
     window.setFramerateLimit(60);
     // create some shapes
-   Player player("mati");
+    sf::Texture texture_guy;
+    if(!texture_guy.loadFromFile("player.png")) {
+    std::cout<<"blad wczytywania tekstury gracza"<<std::endl;
+    }
+   Player player(texture_guy);
 
 
     // run the program as long as the window is open

@@ -13,4 +13,10 @@ CONFIG(debug, debug|release){
 }
 
 SOURCES += \
-        main.cpp
+        bullet.cpp \
+        main.cpp \
+        player.cpp
+
+HEADERS += \
+    bullet.hpp \
+    player.hpp

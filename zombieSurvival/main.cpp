@@ -1,8 +1,10 @@
 #include <iostream>
+#include <cmath>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
+const float pi = M_PI;
 
-class Player : public sf::Sprite {
+        class Player : public sf::Sprite {
 public:
     std::string name() { return name_; }
     int size() { return size_; }
@@ -15,9 +17,28 @@ public:
         this->setPosition(400,300);
 
     }
-    void animate(){
-        //sf::Vector2i position = sf::Mouse::getPosition();
+    void animate(sf::Vector2i &mousePosition){
+        //player angle
+        sf::Vector2f playerPosition = this->getPosition();
+        angle = atan((mousePosition.x-playerPosition.x)/(playerPosition.y-mousePosition.y))*180/pi;
 
+
+        if(mousePosition.y>playerPosition.y){
+            if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
+            std::cout<<"player "<<playerPosition.x<<playerPosition.y<<std::endl;
+            std::cout<<"mouse "<<mousePosition.x<<mousePosition.y<<std::endl;
+            }
+            if(mousePosition.x>playerPosition.x){
+                angle+=180;
+            }else{
+                angle-=180;
+            }
+        }
+        //rotation
+        this->setRotation(angle);
+
+
+        //move
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
             this->move(0,-4);
         }
@@ -33,7 +54,7 @@ public:
 
     }
 protected:
-
+    double angle = 0;
     std::string name_;
     int size_ = 12;
     double speed_;
@@ -65,7 +86,8 @@ int main() {
                 window.close();
 
         }
-            player.animate();
+            sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+            player.animate(mousePosition);
 
 
         // clear the window with black color

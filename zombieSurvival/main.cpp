@@ -4,10 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <player.hpp>
 #include <bullet.hpp>
-
-const float pi = M_PI;
-const int windowHight = 900;
-const int windowWidth = 1400;
+#include <constants.hpp>
 
 
 

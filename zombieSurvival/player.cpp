@@ -5,26 +5,25 @@
 #include <SFML/Graphics.hpp>
 #include <bullet.hpp>
 #include <vector>
+#include <constants.hpp>
 
-const float pi = M_PI;
-const int windowHight = 900;
-const int windowWidth = 1400;
 
-std::string Player::name() { return name_; }
+///////GETTERS
+
 double Player::getSpeed(){return speed;};
-double Player::max_speed() { return max_speed_; }
+double Player::getAngle(){return angle;};
 
+/////////CONSTRUCTOR
 Player::Player(sf::Texture &texture_guy){
     this->setTexture(texture_guy);
     this->setOrigin(13,21);
     this->setPosition(400,300);
 }
-
+////////SHOOTING
 void Player::shooting(sf::Time elapsed, std::vector<Bullet> &bullets){
 static double reload = 0;
 
 if(sf::Mouse::isButtonPressed(sf::Mouse::Left) && reload == 0){
-        //bullets.emplace_back(CustomRectangleShape(angle, this->getPosition()));
         std::cout<<"shoot"<<angle<<std::endl;
         bullets.emplace_back(Bullet(angle,this->getPosition()));
         reload += elapsed.asSeconds();
@@ -36,7 +35,7 @@ if(reload != 0){
      }
 }
 }
-
+/////////////MOVEING
 void Player::moveing(sf::Vector2i mousePosition){
 //player angle
 sf::Vector2f playerPosition = this->getPosition();

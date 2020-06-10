@@ -9,8 +9,9 @@ Bullet(double angle_, sf::Vector2f startPosition);
 void moveing();
 protected:
 double life;//bedzie zalezne od damage
-double speed = 4;
+double speed = 50;
 double angle;
-int damage = 4;
+double damage = 4;
+double bulletRadius = 4;
 };
 #endif

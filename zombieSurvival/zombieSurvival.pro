@@ -19,4 +19,5 @@ SOURCES += \
 
 HEADERS += \
     bullet.hpp \
+    constants.hpp \
     player.hpp

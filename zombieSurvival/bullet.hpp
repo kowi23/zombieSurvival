@@ -1,5 +1,5 @@
-#ifndef player_hpp
-#define player_hpp
+#ifndef bullet_hpp
+#define bullet_hpp
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 
@@ -9,7 +9,7 @@ Bullet(double angle_, sf::Vector2f startPosition);
 void moveing();
 protected:
 double life;//bedzie zalezne od damage
-double speed;
+double speed = 4;
 double angle;
 int damage = 4;
 };

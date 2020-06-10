@@ -3,6 +3,8 @@
 #include <cmath>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
+#include <bullet.hpp>
+#include <vector>
 
 const float pi = M_PI;
 const int windowHight = 900;
@@ -18,12 +20,13 @@ Player::Player(sf::Texture &texture_guy){
     this->setPosition(400,300);
 }
 
-void Player::shooting(sf::Time elapsed){
+void Player::shooting(sf::Time elapsed, std::vector<Bullet> &bullets){
 static double reload = 0;
 
 if(sf::Mouse::isButtonPressed(sf::Mouse::Left) && reload == 0){
         //bullets.emplace_back(CustomRectangleShape(angle, this->getPosition()));
-        std::cout<<"shoot"<<std::endl;
+        std::cout<<"shoot"<<angle<<std::endl;
+        bullets.emplace_back(Bullet(angle,this->getPosition()));
         reload += elapsed.asSeconds();
  }
 if(reload != 0){
@@ -37,7 +40,7 @@ if(reload != 0){
 void Player::moveing(sf::Vector2i mousePosition){
 //player angle
 sf::Vector2f playerPosition = this->getPosition();
-double angle = atan((mousePosition.x-playerPosition.x)/(playerPosition.y-mousePosition.y))*180/pi;
+angle = atan((mousePosition.x-playerPosition.x)/(playerPosition.y-mousePosition.y))*180/pi;
 
 if(mousePosition.y>playerPosition.y){
     if(mousePosition.x>playerPosition.x){

@@ -2,13 +2,15 @@
 #define player_hpp
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
+#include <bullet.hpp>
+#include <vector>
 
 class Player : public sf::Sprite {
 public:
     std::string name();
     double getSpeed();
     double max_speed();
-    void shooting(sf::Time elapsed);
+    void shooting(sf::Time elapsed, std::vector<Bullet> &bullets);
 
     Player(sf::Texture &texture_guy);
     void moveing(sf::Vector2i mousePosition);

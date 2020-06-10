@@ -25,7 +25,7 @@ int main() {
    Player player(texture_guy);
 
 
-   //std::vector<Bullet> bullets;
+   std::vector<Bullet> bullets;
 
     // run the program as long as the window is open
     while (window.isOpen()) {
@@ -41,13 +41,19 @@ int main() {
         }
             sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
             player.moveing(mousePosition);
-            player.shooting(elapsed);
+            player.shooting(elapsed,bullets);
+            for(auto &bullet : bullets) {
+                    bullet.moveing();
+                }
 
 
         // clear the window with black color
         window.clear(sf::Color::Black);
 
         // draw everything here...
+        for(const auto &bullet : bullets) {
+                window.draw(bullet);
+            }
         window.draw(player);
 
         // end the current frame

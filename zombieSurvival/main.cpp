@@ -45,9 +45,9 @@ int main() {
             for (auto it = bullets.begin(); it != bullets.end(); it++){
 
                 it->moveing(time, bullets,it);
-                /*if(it == bullets.end()){
+                if(it == bullets.end()){
                     break;
-                }*/
+                }
             }
 
 

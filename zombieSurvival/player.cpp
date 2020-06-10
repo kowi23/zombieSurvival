@@ -51,17 +51,23 @@ if(mousePosition.y>playerPosition.y){
 this->setRotation(angle);
 
 //move
-if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-    this->move(std::cos((angle-90)*pi/180)*speed, std::sin((angle-90)*pi/180)*speed);
-}
-if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-    this->move(std::cos((angle+90)*pi/180)*speed, std::sin((angle+90)*pi/180)*speed);
-}
-if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-    this->move(std::cos(angle*pi/180)*speed, std::sin(angle*pi/180)*speed);
-}
-if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-    this->move(std::cos((angle-180)*pi/180)*speed, std::sin((angle-180)*pi/180)*speed);
+
+if(fabs(mousePosition.x-playerPosition.x)>playerRadius || fabs(mousePosition.y-playerPosition.y)>playerRadius){
+
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+            this->move(std::cos((angle-90)*pi/180)*speed, std::sin((angle-90)*pi/180)*speed);
+        }
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+
+            this->move(std::cos((angle+90)*pi/180)*speed, std::sin((angle+90)*pi/180)*speed);
+        }
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+            this->move(std::cos(angle*pi/180)*speed, std::sin(angle*pi/180)*speed);
+        }
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+            this->move(std::cos((angle-180)*pi/180)*speed, std::sin((angle-180)*pi/180)*speed);
+        }
+
 }
 //walls
 if(playerPosition.x<playerRadius){

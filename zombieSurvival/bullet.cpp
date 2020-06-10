@@ -17,7 +17,6 @@ Bullet::Bullet(double angle_, sf::Vector2f startPosition, clock_t time){
 
 void Bullet::moveing(clock_t time, std::vector<Bullet> &bullets, std::vector<Bullet>::iterator it){
 
-    std::cout<<time-startTime<<std::endl;
     ///move
     this->move(std::cos((angle-90)*pi/180)*speed, std::sin((angle-90)*pi/180)*speed);
     ///walls
@@ -37,12 +36,8 @@ void Bullet::moveing(clock_t time, std::vector<Bullet> &bullets, std::vector<Bul
     }
     ///bullet life
     if(time-startTime>life){
-        std::cout<<&it<<std::endl;
-        std::cout<<time-startTime<<std::endl;
+
             bullets.erase(it);
-
-
-        std::cout<<"usuniety"<<std::endl;
     }
 
 };

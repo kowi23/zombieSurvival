@@ -20,17 +20,16 @@ Player::Player(sf::Texture &texture_guy){
     this->setPosition(400,300);
 }
 ////////SHOOTING
-void Player::shooting(sf::Time elapsed, std::vector<Bullet> &bullets){
+void Player::shooting(clock_t time, std::vector<Bullet> &bullets){
 static double reload = 0;
 
 if(sf::Mouse::isButtonPressed(sf::Mouse::Left) && reload == 0){
         std::cout<<"shoot"<<angle<<std::endl;
-        bullets.emplace_back(Bullet(angle,this->getPosition()));
-        reload += elapsed.asSeconds();
+        bullets.emplace_back(Bullet(angle,this->getPosition(),time));
+        reload = time;
  }
 if(reload != 0){
-     reload += elapsed.asSeconds();
-     if(reload>gunSpeed){
+     if(time-reload>gunSpeed){
          reload=0;
      }
 }

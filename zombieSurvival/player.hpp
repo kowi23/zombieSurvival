@@ -12,7 +12,7 @@ public:
 
     Player(sf::Texture &texture_guy);
 
-    void shooting(sf::Time elapsed, std::vector<Bullet> &bullets);
+    void shooting(clock_t time, std::vector<Bullet> &bullets);
 
     void moveing(sf::Vector2i mousePosition);
 
@@ -20,6 +20,6 @@ protected:
     int playerRadius = 13;
     double angle = 0;
     double speed = 5;
-    double gunSpeed = 0.7;
+    double gunSpeed = 150;//czas strzalu w ms
 };
 #endif

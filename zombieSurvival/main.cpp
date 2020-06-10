@@ -12,8 +12,9 @@
 int main() {
     // create the window
     sf::RenderWindow window(sf::VideoMode(windowWidth, windowHight), "My window");
-    window.setFramerateLimit(60);
-    sf::Clock clock;
+    window.setFramerateLimit(30);
+    //sf::Clock clock;
+    clock_t time;
     // create some shapes
     sf::Texture texture_guy;
     if(!texture_guy.loadFromFile("player.png")) {
@@ -27,7 +28,8 @@ int main() {
     // run the program as long as the window is open
     while (window.isOpen()) {
         //clock
-        sf::Time elapsed = clock.restart();
+       // sf::Time elapsed = clock.restart();
+        time = std::clock();
         // check all the window's events that were triggered since the last iteration of the loop
         sf::Event event;
         while (window.pollEvent(event)) {
@@ -38,10 +40,16 @@ int main() {
         }
             sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
             player.moveing(mousePosition);
-            player.shooting(elapsed,bullets);
-            for(auto &bullet : bullets) {
-                    bullet.moveing();
-                }
+            player.shooting(time,bullets);
+
+            for (auto it = bullets.begin(); it != bullets.end(); it++){
+
+                it->moveing(time, bullets,it);
+                /*if(it == bullets.end()){
+                    break;
+                }*/
+            }
+
 
 
         // clear the window with black color

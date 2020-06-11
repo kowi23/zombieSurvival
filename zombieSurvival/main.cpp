@@ -25,7 +25,7 @@ int main() {
 
    std::vector<Bullet> bullets;
 
-    // run the program as long as the window is open
+    //// run the program as long as the window is open
     while (window.isOpen()) {
         //clock
        // sf::Time elapsed = clock.restart();

@@ -55,7 +55,9 @@ int main() {
                     break;
                 }
             }
-
+            for (int i = 0; i < monsters.size(); i++){
+                monsters[i].moveing(player.getPosition());
+            }
 
 
         // clear the window with black color
@@ -64,6 +66,9 @@ int main() {
         // draw everything here...
         for(const auto &bullet : bullets) {
                 window.draw(bullet);
+            }
+        for(const auto &monster : monsters) {
+                window.draw(monster);
             }
         window.draw(player);
 

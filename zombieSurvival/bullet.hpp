@@ -1,9 +1,7 @@
 #ifndef bullet_hpp
 #define bullet_hpp
-#include <cmath>
-#include <SFML/Window.hpp>
-#include <SFML/Graphics.hpp>
-#include <constants.hpp>
+#include "myFunctions.hpp"
+
 
 class Bullet : public sf::CircleShape {
 public:

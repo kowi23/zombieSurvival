@@ -1,9 +1,6 @@
 #ifndef myFunctions_hpp
 #define myFunctions_hpp
-#include <SFML/Window.hpp>
-#include <SFML/Graphics.hpp>
-#include <cmath>
 #include <constants.hpp>
-
+/// angle form first cords to seconds
 double calculateAngle(sf::Vector2f firstPos, sf::Vector2f secondPos);
 #endif

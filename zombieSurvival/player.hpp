@@ -1,11 +1,6 @@
 #ifndef player_hpp
 #define player_hpp
-#include <iostream>
-#include <cmath>
-#include <SFML/Window.hpp>
-#include <SFML/Graphics.hpp>
 #include <bullet.hpp>
-#include <constants.hpp>
 #include "myFunctions.hpp"
 
 class Player : public sf::Sprite {

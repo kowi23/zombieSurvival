@@ -1,10 +1,6 @@
 #ifndef monster_hpp
 #define monster_hpp
-#include <iostream>
-#include <cmath>
-#include <SFML/Window.hpp>
-#include <SFML/Graphics.hpp>
-#include <constants.hpp>
+#include "myFunctions.hpp"
 
 class Monster : public sf::CircleShape {
 public:
@@ -18,7 +14,7 @@ public:
 protected:
     int strength = 5;
     double angle = 0;
-    double speed = 5;
+    double speed = 1;
     double gunSpeed = 150;//czas strzalu w ms
 };
 

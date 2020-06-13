@@ -1,9 +1,12 @@
 #ifndef player_hpp
 #define player_hpp
+#include <iostream>
+#include <cmath>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include <bullet.hpp>
-#include <vector>
+#include <constants.hpp>
+#include "myFunctions.hpp"
 
 class Player : public sf::Sprite {
 public:
@@ -14,7 +17,7 @@ public:
 
     void shooting(clock_t time, std::vector<Bullet> &bullets);
 
-    void moveing(sf::Vector2i mousePosition);
+    void moveing(sf::Vector2f mousePosition);
 
 protected:
     int playerRadius = 13;

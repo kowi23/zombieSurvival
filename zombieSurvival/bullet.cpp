@@ -1,9 +1,6 @@
 #include "bullet.hpp"
 #include <iostream>
-#include <cmath>
-#include <SFML/Window.hpp>
-#include <SFML/Graphics.hpp>
-#include <constants.hpp>
+
 
 Bullet::Bullet(double angle_, sf::Vector2f startPosition, clock_t time){
    this->setRadius(bulletRadius);

@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <player.hpp>
 #include <bullet.hpp>
+#include <monster.hpp>
 #include <constants.hpp>
 
 
@@ -24,6 +25,11 @@ int main() {
 
 
    std::vector<Bullet> bullets;
+   std::vector<Monster> monsters;
+   for (int i = 0; i < 5; i++){
+       monsters.emplace_back(Monster());
+
+   }
 
     //// run the program as long as the window is open
     while (window.isOpen()) {
@@ -38,7 +44,7 @@ int main() {
                 window.close();
 
         }
-            sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+            sf::Vector2f mousePosition = sf::Vector2f(sf::Mouse::getPosition(window));
             player.moveing(mousePosition);
             player.shooting(time,bullets);
 

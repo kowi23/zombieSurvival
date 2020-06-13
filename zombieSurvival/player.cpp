@@ -1,11 +1,5 @@
 #include "player.hpp"
-#include <iostream>
-#include <cmath>
-#include <SFML/Window.hpp>
-#include <SFML/Graphics.hpp>
-#include <bullet.hpp>
-#include <vector>
-#include <constants.hpp>
+
 
 
 ///////GETTERS
@@ -24,7 +18,7 @@ void Player::shooting(clock_t time, std::vector<Bullet> &bullets){
 static double reload = 0;
 
 if(sf::Mouse::isButtonPressed(sf::Mouse::Left) && reload == 0){
-        std::cout<<"shoot"<<angle<<std::endl;
+
         bullets.emplace_back(Bullet(angle,this->getPosition(),time));
         reload = time;
  }
@@ -35,18 +29,12 @@ if(reload != 0){
 }
 }
 /////////////MOVEING
-void Player::moveing(sf::Vector2i mousePosition){
+void Player::moveing(sf::Vector2f mousePosition){
 //player angle
 sf::Vector2f playerPosition = this->getPosition();
-angle = atan((mousePosition.x-playerPosition.x)/(playerPosition.y-mousePosition.y))*180/pi;
+angle = calculateAngle(playerPosition,mousePosition);
 
-if(mousePosition.y>playerPosition.y){
-    if(mousePosition.x>playerPosition.x){
-        angle+=180;
-    }else{
-        angle-=180;
-    }
-}
+
 //rotation
 this->setRotation(angle);
 

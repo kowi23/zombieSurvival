@@ -8,8 +8,8 @@ double Player::getSpeed(){return speed;};
 double Player::getAngle(){return angle;};
 
 /////////CONSTRUCTOR
-Player::Player(sf::Texture &texture_guy){
-    this->setTexture(texture_guy);
+Player::Player(sf::Texture &texture){
+    this->setTexture(texture);
     this->setOrigin(13,21);
     this->setPosition(400,300);
 }

@@ -2,12 +2,12 @@
 #define monster_hpp
 #include "myFunctions.hpp"
 
-class Monster : public sf::CircleShape {
+class Monster : public sf::Sprite {
 public:
     double getSpeed();
     double getAngle();
 
-    Monster();
+    Monster(sf::Texture &texture);
 
     void moveing(sf::Vector2f playerPosition);
 

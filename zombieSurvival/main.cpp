@@ -16,18 +16,22 @@ int main() {
     window.setFramerateLimit(30);
     //sf::Clock clock;
     clock_t time;
-    // create some shapes
-    sf::Texture texture_guy;
-    if(!texture_guy.loadFromFile("player.png")) {
+
+    sf::Texture playerTexture;
+    if(!playerTexture.loadFromFile("texture/player.png")) {
     std::cout<<"blad wczytywania tekstury gracza"<<std::endl;
     }
-   Player player(texture_guy);
+    sf::Texture monsterTexture;
+    if(!monsterTexture.loadFromFile("texture/monster.png")) {
+    std::cout<<"blad wczytywania tekstury gracza"<<std::endl;
+    }
+   Player player(playerTexture);
 
 
    std::vector<Bullet> bullets;
    std::vector<Monster> monsters;
    for (int i = 0; i < 5; i++){
-       monsters.emplace_back(Monster());
+       monsters.emplace_back(Monster(monsterTexture));
 
    }
 
@@ -61,7 +65,7 @@ int main() {
 
 
         // clear the window with black color
-        window.clear(sf::Color::Black);
+        window.clear(sf::Color::Yellow);
 
         // draw everything here...
         for(const auto &bullet : bullets) {

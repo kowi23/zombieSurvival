@@ -12,10 +12,9 @@ public:
     void moveing(sf::Vector2f playerPosition);
 
 protected:
-    int strength = 5;
+    int strength = 13;//jednoczesnie promien zombie
     double angle = 0;
     double speed = 1;
-    double gunSpeed = 150;//czas strzalu w ms
 };
 
 

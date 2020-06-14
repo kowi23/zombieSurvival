@@ -2,7 +2,8 @@
 
 
 Monster::Monster(sf::Texture &texture){
-    this->setTexture(texture);
+    this->setTexture(texture);///orginalnie 30x30
+    this->setScale(1/(15.f/strength),1/(15.f/strength));
     this->setPosition(700,-10);
 
 }

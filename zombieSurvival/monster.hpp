@@ -1,6 +1,7 @@
 #ifndef monster_hpp
 #define monster_hpp
 #include "myFunctions.hpp"
+#include "player.hpp"
 
 class Monster : public sf::Sprite {
 public:
@@ -9,7 +10,7 @@ public:
 
     Monster(sf::Texture &texture);
 
-    void moveing(sf::Vector2f playerPosition);
+    void moveing(Player &player);
 
 protected:
     int strength = 13;//jednoczesnie promien zombie

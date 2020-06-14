@@ -7,6 +7,7 @@ class Player : public sf::Sprite {
 public:
     double getSpeed();
     double getAngle();
+    double getRadius();
 
     Player(sf::Texture &texture_guy);
 

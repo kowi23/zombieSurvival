@@ -6,6 +6,7 @@
 
 double Player::getSpeed(){return speed;};
 double Player::getAngle(){return angle;};
+double Player::getRadius(){return playerRadius;};
 
 /////////CONSTRUCTOR
 Player::Player(sf::Texture &texture){

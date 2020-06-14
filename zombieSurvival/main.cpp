@@ -60,7 +60,7 @@ int main() {
                 }
             }
             for (int i = 0; i < monsters.size(); i++){
-                monsters[i].moveing(player.getPosition());
+                monsters[i].moveing(player);
             }
 
 

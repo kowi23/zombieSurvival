@@ -1,6 +1,6 @@
 #include "monster.hpp"
 
-double Monster::getStrength(){return strength;}
+int Monster::getStrength(){return strength;}
 
 void Monster::subtractHealth(int n,std::vector<Monster> &monsters, int index){
     health_ -= n;

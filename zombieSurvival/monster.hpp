@@ -4,9 +4,9 @@
 
 class Monster : public sf::Sprite {
 public:
-    double getSpeed();
-    double getAngle();
-    double getStrength();
+    float getSpeed();
+    float getAngle();
+    int getStrength();
     bool isBiting();
     void subtractHealth(int n,std::vector<Monster> &monsters, int index);
     Monster(sf::Texture &texture);
@@ -15,8 +15,8 @@ public:
 
 protected:
     int strength = 13;//jednoczesnie promien zombie
-    double angle = 0;
-    double speed = 2;
+    float angle = 0;
+    float speed = 2;
     int health_ = 100;
     bool biting_ = false;
 };

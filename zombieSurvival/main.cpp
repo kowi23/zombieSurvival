@@ -65,7 +65,8 @@ int main() {
             for (int i = 0; i < monsters.size(); i++){
                 monsters[i].moveing(player.getPosition(), monsters, i);
                 if(monsters[i].isBiting()){
-                    std::cout<<"biting"<<std::endl;
+                    player.subtractHealth(monsters[i].getStrength()/3);
+
                 }
 
             }

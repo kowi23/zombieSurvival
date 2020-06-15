@@ -11,11 +11,11 @@ public:
     void hit(std::vector<Monster> &monsters, std::vector<Bullet> &bullets, int index);
     void moveing(clock_t time, std::vector<Bullet> &bullets, int index);
 protected:
-    double life = 1000;//bedzie zalezne od damage, w ms
-    double speed = 50;
-    double angle;
-    double damage_ = 40;
-    double bulletRadius = 4;
+    int life = 1000;//bedzie zalezne od damage, w ms
+    int speed = 50;
+    float angle;
+    int damage_ = 40;
+    int bulletRadius = 4;
     clock_t startTime;
 
 };

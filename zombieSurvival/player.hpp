@@ -7,9 +7,10 @@
 
 class Player : public sf::Sprite {
 public:
-    double getSpeed();
-    double getAngle();
-    double getRadius();
+    void subtractHealth(int n);
+    float getSpeed();
+    float getAngle();
+    int getRadius();
 
     Player(sf::Texture &texture_guy);
 
@@ -19,8 +20,9 @@ public:
 
 protected:
     int playerRadius = constPlayerRadius;
-    double angle = 0;
-    double speed = 5;
-    double gunSpeed = 150;//czas strzalu w ms
+    float angle;
+    float speed = 5;
+    int gunSpeed = 150;//czas strzalu w ms
+    int health_ = 1000;
 };
 #endif

@@ -4,9 +4,10 @@ class Bullet;
 
 ///////GETTERS
 
-double Player::getSpeed(){return speed;};
-double Player::getAngle(){return angle;};
-double Player::getRadius(){return playerRadius;};
+float Player::getSpeed(){return speed;};
+float Player::getAngle(){return angle;};
+int Player::getRadius(){return playerRadius;};
+void Player::subtractHealth(int n){health_ -= n; std::cout<<health_<<std::endl;}
 
 /////////CONSTRUCTOR
 Player::Player(sf::Texture &texture){

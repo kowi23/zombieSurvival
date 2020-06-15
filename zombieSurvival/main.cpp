@@ -16,6 +16,8 @@ int main() {
     window.setFramerateLimit(30);
     //sf::Clock clock;
     clock_t time;
+    clock_t timer;
+    int counter = 0;
 
     sf::Texture playerTexture;
     if(!playerTexture.loadFromFile("texture/player.png")) {
@@ -30,10 +32,7 @@ int main() {
 
    std::vector<Bullet> bullets;
    std::vector<Monster> monsters;
-   for (int i = 0; i < 5; i++){
-       monsters.emplace_back(Monster(monsterTexture));
 
-   }
 
     //// run the program as long as the window is open
     while (window.isOpen()) {
@@ -60,7 +59,13 @@ int main() {
                 }
             }
             for (int i = 0; i < monsters.size(); i++){
-                monsters[i].moveing(player);
+                monsters[i].moveing(player, monsters, i);
+            }
+            if(time-timer>1000 && counter < 10){
+                counter ++;
+                timer = time;
+                monsters.emplace_back(Monster(monsterTexture));
+
             }
 
 

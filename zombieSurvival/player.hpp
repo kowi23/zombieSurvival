@@ -1,7 +1,9 @@
 #ifndef player_hpp
 #define player_hpp
-#include <bullet.hpp>
-#include "myFunctions.hpp"
+
+#include <myFunctions.hpp>
+#include "bullet.hpp"
+
 
 class Player : public sf::Sprite {
 public:
@@ -16,7 +18,7 @@ public:
     void moveing(sf::Vector2f mousePosition);
 
 protected:
-    int playerRadius = 13;
+    int playerRadius = constPlayerRadius;
     double angle = 0;
     double speed = 5;
     double gunSpeed = 150;//czas strzalu w ms

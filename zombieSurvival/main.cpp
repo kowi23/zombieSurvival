@@ -51,16 +51,26 @@ int main() {
             player.moveing(mousePosition);
             player.shooting(time,bullets);
 
-            for (auto it = bullets.begin(); it != bullets.end(); it++){
+            /*for (auto it = bullets.begin(); it != bullets.end(); it++){
 
                 it->moveing(time, bullets,it);
                 if(it == bullets.end()){
                     break;
                 }
+            }*/
+            for (int i = 0; i < bullets.size(); i++){
+                bullets[i].moveing(time, bullets, i);
+                bullets[i].hit(monsters);
             }
             for (int i = 0; i < monsters.size(); i++){
-                monsters[i].moveing(player, monsters, i);
+                monsters[i].moveing(player.getPosition(), monsters, i);
+                if(monsters[i].isBiting()){
+                    std::cout<<"biting"<<std::endl;
+                }
+
             }
+
+            //zombie respawn
             if(time-timer>1000 && counter < 10){
                 counter ++;
                 timer = time;

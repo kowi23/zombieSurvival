@@ -7,5 +7,6 @@
 const float pi = M_PI;
 const int windowHight = 900;
 const int windowWidth = 1400;
+const int constPlayerRadius = 13;
 #endif
 

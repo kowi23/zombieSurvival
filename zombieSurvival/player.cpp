@@ -1,6 +1,6 @@
 #include "player.hpp"
 
-
+class Bullet;
 
 ///////GETTERS
 

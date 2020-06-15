@@ -1,5 +1,5 @@
 #include "bullet.hpp"
-#include <iostream>
+
 
 
 Bullet::Bullet(double angle_, sf::Vector2f startPosition, clock_t time){
@@ -12,7 +12,7 @@ Bullet::Bullet(double angle_, sf::Vector2f startPosition, clock_t time){
 }
 
 
-void Bullet::moveing(clock_t time, std::vector<Bullet> &bullets, std::vector<Bullet>::iterator it){
+void Bullet::moveing(clock_t time, std::vector<Bullet> &bullets, int index){
 
     ///move
     this->move(std::cos((angle-90)*pi/180)*speed, std::sin((angle-90)*pi/180)*speed);
@@ -34,7 +34,16 @@ void Bullet::moveing(clock_t time, std::vector<Bullet> &bullets, std::vector<Bul
     ///bullet life
     if(time-startTime>life){
 
-            bullets.erase(it);
+            bullets.erase(bullets.begin()+index);
     }
 
-};
+}
+void Bullet::hit(std::vector<Monster> &monsters){
+    sf::FloatRect bulletBounds = this->getGlobalBounds();
+
+    for (int i = 0; i < monsters.size(); i++){
+        if(bulletBounds.intersects(monsters[i].getGlobalBounds())){
+            monsters[i].subtractHealth(damage_);
+        }
+    }
+}

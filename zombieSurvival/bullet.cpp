@@ -38,12 +38,15 @@ void Bullet::moveing(clock_t time, std::vector<Bullet> &bullets, int index){
     }
 
 }
-void Bullet::hit(std::vector<Monster> &monsters){
+void Bullet::hit(std::vector<Monster> &monsters, std::vector<Bullet> &bullets, int index){
+
     sf::FloatRect bulletBounds = this->getGlobalBounds();
 
     for (int i = 0; i < monsters.size(); i++){
         if(bulletBounds.intersects(monsters[i].getGlobalBounds())){
-            monsters[i].subtractHealth(damage_);
+            monsters[i].subtractHealth(damage_, monsters, i);
+            bullets.erase(bullets.begin()+index);
+            break;
         }
     }
 }

@@ -8,7 +8,7 @@ public:
     double getAngle();
     double getStrength();
     bool isBiting();
-    void subtractHealth(int n);
+    void subtractHealth(int n,std::vector<Monster> &monsters, int index);
     Monster(sf::Texture &texture);
 
     void moveing(sf::Vector2f playerPosition, std::vector<Monster> &monsters, int index);

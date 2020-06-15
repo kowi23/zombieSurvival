@@ -2,9 +2,12 @@
 
 double Monster::getStrength(){return strength;}
 
-void Monster::subtractHealth(int n){
+void Monster::subtractHealth(int n,std::vector<Monster> &monsters, int index){
     health_ -= n;
     std::cout<<health_<<std::endl;
+    if(health_<=0){
+        monsters.erase(monsters.begin()+index);
+    }
 }
 bool Monster::isBiting(){
     return biting_ ;

@@ -60,7 +60,7 @@ int main() {
             }*/
             for (int i = 0; i < bullets.size(); i++){
                 bullets[i].moveing(time, bullets, i);
-                bullets[i].hit(monsters);
+                bullets[i].hit(monsters, bullets, i);
             }
             for (int i = 0; i < monsters.size(); i++){
                 monsters[i].moveing(player.getPosition(), monsters, i);

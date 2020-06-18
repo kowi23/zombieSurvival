@@ -7,7 +7,7 @@ class Bullet;
 float Player::getSpeed(){return speed;};
 float Player::getAngle(){return angle_;};
 int Player::getRadius(){return playerRadius;};
-void Player::subtractHealth(int n){health_ -= n; std::cout<<health_<<std::endl;}
+void Player::subtractHealth(int n){health_ -= n;}
 void Player::changeWeapond(weapond weapond){changedWeapond_ = weapond;}
 
 /////////CONSTRUCTOR

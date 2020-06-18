@@ -47,6 +47,14 @@ int main() {
                 window.close();
 
         }
+        if (event.type == sf::Event::KeyPressed)
+        {
+            if (event.key.code == sf::Keyboard::X)
+            {
+                std::cout << "the escape key was pressed" << std::endl;
+
+            }
+        }
             sf::Vector2f mousePosition = sf::Vector2f(sf::Mouse::getPosition(window));
             player.moveing(mousePosition);
             player.shooting(time,bullets);

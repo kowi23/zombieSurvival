@@ -4,7 +4,7 @@ int Monster::getStrength(){return strength;}
 
 void Monster::subtractHealth(int n,std::vector<Monster> &monsters, int index){
     health_ -= n;
-    std::cout<<health_<<std::endl;
+    std::cout<<"Monster "<<index<<" HP: "<<health_<<std::endl;
     if(health_<=0){
         monsters.erase(monsters.begin()+index);
     }
@@ -40,7 +40,36 @@ void Monster::moveing(sf::Vector2f playerPosition, std::vector<Monster> &monster
         //zwykly ruch
         ////angle
         angle = calculateAngle(monsterPosition,playerPosition);
+        //bez wykrywania scian
         this->move(std::cos((angle-90)*pi/180)*speed, std::sin((angle-90)*pi/180)*speed);
+        /*
+        ///wykrywanie scian
+        float speedX = std::cos((angle-90)*pi/180)*speed;
+        float speedY = std::sin((angle-90)*pi/180)*speed;
+        if(monsterPosition.x>=windowWidth){
+            if(speedX>0){
+                std::cout<<"prawo"<<std::endl;
+                speedX = 0;
+            }
+        }else if(monsterPosition.x<=0){
+            if(speedX<0){
+                std::cout<<"lewo"<<std::endl;
+                speedX = 0;
+            }
+        }else if(monsterPosition.y>=windowHight){
+            if(speedY>0){
+                std::cout<<"dol"<<std::endl;
+                speedY = 0;
+            }
+        }else if(monsterPosition.y<=0){
+            std::cout<<"gora" <<speedY<<std::endl;
+            if(speedY<0){
+                std::cout<<"gora2"<<std::endl;
+                speedY = 0;
+            }
+        }
+        this->move(speedX,speedY);
+        */
 
     }
 

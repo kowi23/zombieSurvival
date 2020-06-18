@@ -16,7 +16,7 @@ public:
 protected:
     int strength = 13;//jednoczesnie promien zombie
     float angle = 0;
-    float speed = 2;
+    float speed = 3;
     int health_ = 100;
     bool biting_ = false;
 };

@@ -76,7 +76,6 @@ int main() {
                 counter ++;
                 timer = time;
                 monsters.emplace_back(Monster(monsterTexture));
-
             }
 
 

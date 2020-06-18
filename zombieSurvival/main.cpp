@@ -43,33 +43,25 @@ int main() {
         sf::Event event;
         while (window.pollEvent(event)) {
             // "close requested" event: we close the window
-            if (event.type == sf::Event::Closed)
+            if (event.type == sf::Event::Closed){
                 window.close();
-
-        }
-        if (event.type == sf::Event::KeyPressed)
-        {
-            if (event.key.code == sf::Keyboard::X)
-            {
-                std::cout << "the escape key was pressed" << std::endl;
-
+             }
+            ///zmiana broni
+            if (event.type == sf::Event::KeyPressed){
+                player.changingWeapond(event);
             }
-        }
+         }
+        ////animacja gracza
             sf::Vector2f mousePosition = sf::Vector2f(sf::Mouse::getPosition(window));
             player.moveing(mousePosition);
             player.shooting(time,bullets);
 
-            /*for (auto it = bullets.begin(); it != bullets.end(); it++){
-
-                it->moveing(time, bullets,it);
-                if(it == bullets.end()){
-                    break;
-                }
-            }*/
+           ///animacja pociskow
             for (int i = 0; i < bullets.size(); i++){
                 bullets[i].moveing(time, bullets, i);
                 bullets[i].hit(monsters, bullets, i);
             }
+            ///animacja potworow
             for (int i = 0; i < monsters.size(); i++){
                 monsters[i].moveing(player.getPosition(), monsters, i);
                 if(monsters[i].isBiting()){
@@ -88,7 +80,7 @@ int main() {
 
 
         // clear the window with black color
-        window.clear(sf::Color::Yellow);
+        window.clear(sf::Color::White);
 
         // draw everything here...
         for(const auto &bullet : bullets) {

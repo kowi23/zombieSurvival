@@ -17,19 +17,23 @@ Player::Player(sf::Texture &texture){
     this->setPosition(400,300);
 }
 ////////CHANGING WEAPOND
-void Player::changingWeapond(sf::Event event){
+void Player::changingWeapond(sf::Event event, sf::RectangleShape &weapondBackground){
     if (event.key.code == sf::Keyboard::Num1){
         changedWeapond_ = weapond::Handgun;
-        gunSpeed_ = 850;
+        gunSpeed_ = 700;
+        weapondBackground.setPosition(0,windowHight-75);
     }else if (event.key.code == sf::Keyboard::Num2){
         changedWeapond_ = weapond::Rifle;
         gunSpeed_ = 150;
+        weapondBackground.setPosition(150,windowHight-75);
     }else if (event.key.code == sf::Keyboard::Num3){
         changedWeapond_ = weapond::Shotgun;
         gunSpeed_ = 700;
+        weapondBackground.setPosition(300,windowHight-75);
     }else if (event.key.code == sf::Keyboard::Num4){
         changedWeapond_ = weapond::SniperRifle;
         gunSpeed_ = 900;
+        weapondBackground.setPosition(450,windowHight-75);
     }
 
 }

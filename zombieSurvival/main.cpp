@@ -17,6 +17,7 @@ int main() {
     //sf::Clock clock;
     clock_t time;
     clock_t timer;
+    //do spawnu zombie
     int counter = 0;
 
     sf::Texture playerTexture;
@@ -27,14 +28,52 @@ int main() {
     if(!monsterTexture.loadFromFile("texture/monster.png")) {
     std::cout<<"blad wczytywania tekstury gracza"<<std::endl;
     }
+    sf::Texture handgunTexture;
+    if(!handgunTexture.loadFromFile("texture/handgun.png")) {
+    std::cout<<"blad wczytywania tekstury gracza"<<std::endl;
+    }
+    sf::Texture rifleTexture;
+    if(!rifleTexture.loadFromFile("texture/rifle.png")) {
+    std::cout<<"blad wczytywania tekstury gracza"<<std::endl;
+    }
+    sf::Texture shotgunTexture;
+    if(!shotgunTexture.loadFromFile("texture/shotgun.png")) {
+    std::cout<<"blad wczytywania tekstury gracza"<<std::endl;
+    }
+    sf::Texture sniperrifleTexture;
+    if(!sniperrifleTexture.loadFromFile("texture/sniperrifle.png")) {
+    std::cout<<"blad wczytywania tekstury gracza"<<std::endl;
+    }
+
+    ///STWORZENIE GRACZA
    Player player(playerTexture);
-
-
+    ///STWORZENIE VEKTOROW
    std::vector<Bullet> bullets;
    std::vector<Monster> monsters;
 
+    ///STWORZENIE MENU WYBORU BRONI
+    sf::Sprite handgun = sf::Sprite();
+    handgun.setTexture(handgunTexture);
+    handgun.setPosition(0,windowHight-75);
+    sf::Sprite rifle = sf::Sprite();
+    rifle.setTexture(rifleTexture);
+    rifle.setPosition(150,windowHight-75);
+    sf::Sprite shotgun = sf::Sprite();
+    shotgun.setTexture(shotgunTexture);
+    shotgun.setPosition(300,windowHight-75);
+    sf::Sprite sniperrifle = sf::Sprite();
+    sniperrifle.setTexture(sniperrifleTexture);
+    sniperrifle.setPosition(450,windowHight-75);
+    sf::RectangleShape background = sf::RectangleShape({windowWidth,75});
+    background.setFillColor(sf::Color(230, 230, 230));
+    background.setPosition(0,windowHight-75);
+    background.setOutlineColor(sf::Color::Black);
+    background.setOutlineThickness(1);
+    sf::RectangleShape weapondBackground = sf::RectangleShape({150,75});
+    weapondBackground.setFillColor(sf::Color::White);
+    weapondBackground.setPosition(0,windowHight-75);
 
-    //// run the program as long as the window is open
+    ////GLOWNA PETLA GRY
     while (window.isOpen()) {
         //clock
        // sf::Time elapsed = clock.restart();
@@ -48,7 +87,7 @@ int main() {
              }
             ///zmiana broni
             if (event.type == sf::Event::KeyPressed){
-                player.changingWeapond(event);
+                player.changingWeapond(event, weapondBackground);
             }
          }
         ////animacja gracza
@@ -90,6 +129,14 @@ int main() {
                 window.draw(monster);
             }
         window.draw(player);
+        ///DRAW WEAPOND MENU
+        window.draw(background);
+        window.draw(weapondBackground);
+        window.draw(handgun);
+        window.draw(rifle);
+        window.draw(shotgun);
+        window.draw(sniperrifle);
+
 
         // end the current frame
         window.display();

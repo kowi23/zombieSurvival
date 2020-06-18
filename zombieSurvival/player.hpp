@@ -15,7 +15,7 @@ class Player : public sf::Sprite {
 public:
     void subtractHealth(int n);
     void changedWeapond(weapond weapond);
-    void changingWeapond(sf::Event event);
+    void changingWeapond(sf::Event event, sf::RectangleShape &weapondBackground);
     //getters
     float getSpeed();
     float getAngle();
@@ -31,8 +31,8 @@ protected:
     int playerRadius = constPlayerRadius;
     float angle_;
     float speed = 5;
-    int gunSpeed_ = 850;//czas strzalu w ms
+    int gunSpeed_ = 700;//czas strzalu w ms
     int health_ = 1000;
-    weapond changedWeapond_ = weapond::Shotgun;
+    weapond changedWeapond_ = weapond::Handgun;
 };
 #endif

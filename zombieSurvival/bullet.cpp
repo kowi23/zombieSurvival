@@ -23,7 +23,7 @@ void Bullet::moveing(clock_t time, std::vector<Bullet> &bullets, int index){
     if(bulletPosition.x<bulletRadius){
         angle_ = fabs(angle_);
     }
-    if(bulletPosition.y<bulletRadius || bulletPosition.y>windowHight-bulletRadius){
+    if(bulletPosition.y<bulletRadius || bulletPosition.y>windowHight-75-bulletRadius){
         if(angle_ > 0){
             angle_ = 180 - angle_;
         }else{

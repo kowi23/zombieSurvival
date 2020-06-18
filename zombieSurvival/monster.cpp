@@ -56,7 +56,7 @@ void Monster::moveing(sf::Vector2f playerPosition, std::vector<Monster> &monster
                 std::cout<<"lewo"<<std::endl;
                 speedX = 0;
             }
-        }else if(monsterPosition.y>=windowHight){
+        }else if(monsterPosition.y>=windowHight-75){
             if(speedY>0){
                 std::cout<<"dol"<<std::endl;
                 speedY = 0;

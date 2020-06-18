@@ -72,7 +72,12 @@ int main() {
     sf::RectangleShape weapondBackground = sf::RectangleShape({150,75});
     weapondBackground.setFillColor(sf::Color::White);
     weapondBackground.setPosition(0,windowHight-75);
-    ////
+    ///NAPIS Z HP
+    sf::Font font;
+    font.loadFromFile("texture/sansation.ttf");
+    sf::Text playerHP("1000 HP", font,40);
+     playerHP.setColor(sf::Color::Black);
+     playerHP.setPosition(650,windowHight-50);
     ////GLOWNA PETLA GRY
     while (window.isOpen()) {
         //clock
@@ -104,7 +109,7 @@ int main() {
             for (int i = 0; i < monsters.size(); i++){
                 monsters[i].moveing(player.getPosition(), monsters, i);
                 if(monsters[i].isBiting()){
-                    player.subtractHealth(monsters[i].getStrength()/3);
+                    player.subtractHealth(monsters[i].getStrength()/3, playerHP);
 
                 }
 
@@ -132,6 +137,7 @@ int main() {
         ///DRAW WEAPOND MENU
         window.draw(background);
         window.draw(weapondBackground);
+        window.draw(playerHP);
         window.draw(handgun);
         window.draw(rifle);
         window.draw(shotgun);

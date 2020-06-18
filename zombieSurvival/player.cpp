@@ -1,5 +1,6 @@
 #include "player.hpp"
 
+
 class Bullet;
 
 ///////GETTERS
@@ -7,7 +8,7 @@ class Bullet;
 float Player::getSpeed(){return speed;};
 float Player::getAngle(){return angle_;};
 int Player::getRadius(){return playerRadius;};
-void Player::subtractHealth(int n){health_ -= n;}
+void Player::subtractHealth(int n, sf::Text &playerHP){health_ -= n; playerHP.setString(std::to_string(health_)+" HP");}
 void Player::changedWeapond(weapond weapond){changedWeapond_ = weapond;}
 
 /////////CONSTRUCTOR
@@ -117,8 +118,8 @@ if(playerPosition.x<playerRadius){
 if(playerPosition.y<playerRadius){
     this->setPosition(playerPosition.x,playerRadius);
 }
-if(playerPosition.y>windowHight-playerRadius){
-    this->setPosition(playerPosition.x,windowHight-playerRadius);
+if(playerPosition.y>windowHight-75-playerRadius){
+    this->setPosition(playerPosition.x,windowHight-75-playerRadius);
 }
 if(playerPosition.x>windowWidth-playerRadius){
     this->setPosition(windowWidth-playerRadius,playerPosition.y);

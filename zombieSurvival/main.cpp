@@ -72,7 +72,7 @@ int main() {
     sf::RectangleShape weapondBackground = sf::RectangleShape({150,75});
     weapondBackground.setFillColor(sf::Color::White);
     weapondBackground.setPosition(0,windowHight-75);
-    ///
+    ////
     ////GLOWNA PETLA GRY
     while (window.isOpen()) {
         //clock

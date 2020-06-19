@@ -12,8 +12,7 @@ void Player::subtractHealth(int n, sf::Text &playerHP){health_ -= n; playerHP.se
 void Player::changedWeapond(weapond weapond){changedWeapond_ = weapond;}
 
 /////////CONSTRUCTOR
-Player::Player(sf::Texture &texture){
-    this->setTexture(texture);
+Player::Player(){
     this->setOrigin(13,21);
     this->setPosition(400,300);
 }

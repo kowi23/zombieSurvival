@@ -21,7 +21,7 @@ public:
     float getAngle();
     int getRadius();
 
-    Player(sf::Texture &texture_guy);
+    Player();
 
     void shooting(clock_t time, std::vector<Bullet> &bullets);
 

@@ -4,7 +4,7 @@
 Game::Game():
 window(sf::VideoMode(windowWidth, windowHight), "My window")
 {
-    window.setFramerateLimit(30);
+    window.setFramerateLimit(60);
 }
 
 
@@ -159,18 +159,18 @@ void Game::zombieRespawn(){
             level++;
             levelStr.setString("Lvl: " + std::to_string(level));
         }
-        ///lvl 1
-        if(counter < 2){
+        ///levels
+        if(counter < 2 && level == 1){
             counter ++;
-            monsters.emplace_back(Monster(monsterTexture, 3,(std::rand() % 6)+9, (std::rand() % 21)+90));
+            monsters.emplace_back(Monster(monsterTexture, 1.5,(std::rand() % 6)+9, (std::rand() % 21)+90));
         }
         if(counter < 2 && level == 2){
             counter ++;
-            monsters.emplace_back(Monster(monsterTexture, 3,(std::rand() % 6)+9, (std::rand() % 21)+90));
+            monsters.emplace_back(Monster(monsterTexture, 1.5,(std::rand() % 6)+9, (std::rand() % 21)+90));
         }
         if(counter < 2 && level == 3){
             counter ++;
-            monsters.emplace_back(Monster(monsterTexture, 3,(std::rand() % 6)+9, (std::rand() % 21)+90));
+            monsters.emplace_back(Monster(monsterTexture, 1.5,(std::rand() % 6)+9, (std::rand() % 21)+90));
         }
         if(level == 4){
             std::cout<<"Win!!!!!"<<std::endl;

@@ -31,7 +31,7 @@ public:
 protected:
     int playerRadius = constPlayerRadius;
     float angle_;
-    float speed = 5;
+    float speed = 2.5;
     int gunSpeed_ = 700;//czas strzalu w ms
     int health_ = 1000;
     weapond changedWeapond_ = weapond::Handgun;

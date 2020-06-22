@@ -12,7 +12,7 @@ public:
     void moveing(clock_t time, std::vector<Bullet> &bullets, int index);
 protected:
     int life_ = 1000;//bedzie zalezne od damage, w ms
-    int speed = 50;
+    int speed = 20;
     float angle_;
     int damage_ = 40;
     int bulletRadius = 4;

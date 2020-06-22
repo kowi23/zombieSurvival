@@ -15,6 +15,7 @@ CONFIG(debug, debug|release){
 SOURCES += \
         bullet.cpp \
         game.cpp \
+        item.cpp \
         main.cpp \
         monster.cpp \
         myFunctions.cpp \
@@ -24,6 +25,7 @@ HEADERS += \
     bullet.hpp \
     constants.hpp \
     game.hpp \
+    item.hpp \
     monster.hpp \
     myFunctions.hpp \
     player.hpp

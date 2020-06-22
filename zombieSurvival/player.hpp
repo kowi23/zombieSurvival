@@ -4,12 +4,7 @@
 #include <myFunctions.hpp>
 #include "bullet.hpp"
 
-enum class weapond {
-    Handgun,
-    Rifle,
-    Shotgun,
-    SniperRifle,
-};
+
 
 class Player : public sf::Sprite {
 public:

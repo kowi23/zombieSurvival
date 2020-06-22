@@ -4,6 +4,19 @@
 #include <iostream>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
+
+enum class weapond {
+    Handgun,
+    Rifle,
+    Shotgun,
+    SniperRifle,
+};
+enum class itemType {
+    health,
+    granade,
+    Shotgun,
+    SniperRifle,
+};
 const float pi = M_PI;
 const int windowHight = 900;
 const int windowWidth = 1400;

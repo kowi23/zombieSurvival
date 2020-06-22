@@ -98,6 +98,9 @@ void Game::drawAndDisplay(){
     for(const auto &monster : monsters) {
             window.draw(monster);
         }
+    for(const auto &item : items) {
+            window.draw(item);
+        }
 
     window.draw(player);
     ///DRAW WEAPOND MENU
@@ -147,7 +150,8 @@ void Game::animation(){
 
         }
 }
-void Game::zombieRespawn(){
+///spawn zombies, hp regeneration, levels, items generation
+void Game::oneSecCounter(){
     if(time-timer>1000){
         timer = time;
         if(player.getHealth()<1000){
@@ -175,12 +179,22 @@ void Game::zombieRespawn(){
         if(level == 4){
             std::cout<<"Win!!!!!"<<std::endl;
         }
-
+        switch ( std::rand() % 5 )
+          {
+             case 0:
+                items.emplace_back(Item(playerTexture,itemType::health,sf::Vector2f((std::rand() % (windowWidth-50))+25,(std::rand() % (windowHight-125))+25)));
+                break;
+             case 1:
+                items.emplace_back(Item(playerTexture,itemType::granade,sf::Vector2f((std::rand() % (windowWidth-50))+25,(std::rand() % (windowHight-125))+25)));
+                break;
+             default:
+                break;
+          }
 
 
     }
 }
-////Contains animation, events and drawAndDisplay
+////Contains animation, events, drawAndDisplay and oneSecCounter
 void Game::mainLoop(){
     while (window.isOpen()) {
 
@@ -191,7 +205,7 @@ void Game::mainLoop(){
 
         animation();
 
-        zombieRespawn();
+        oneSecCounter();
 
         drawAndDisplay();
     }

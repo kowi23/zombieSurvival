@@ -3,6 +3,7 @@
 #include <player.hpp>
 #include <bullet.hpp>
 #include <monster.hpp>
+#include <item.hpp>
 
 class Game{
 public:
@@ -12,7 +13,7 @@ public:
     void drawAndDisplay();
     void events();
     void animation();
-    void zombieRespawn();
+    void oneSecCounter();
     void mainLoop();
 private:
     sf::RenderWindow window;
@@ -24,6 +25,7 @@ private:
     Player player;
     std::vector<Bullet> bullets;
     std::vector<Monster> monsters;
+    std::vector<Item> items;
 
     ///WEAPONDBAR
     sf::Sprite handgun;

@@ -19,6 +19,7 @@ private:
     clock_t time;
     clock_t timer;
     int counter = 0;
+    int level = 0;
     ///MAIN GAME OBJECTS
     Player player;
     std::vector<Bullet> bullets;
@@ -32,6 +33,7 @@ private:
     sf::RectangleShape background;
     sf::RectangleShape weapondBackground;
     sf::Text playerHP;
+    sf::Text levelStr;
 
     ///TEXTURES
     sf::Font font;

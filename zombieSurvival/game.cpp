@@ -47,19 +47,19 @@ void Game::createObjects(){
 
     handgun.setTexture(handgunTexture);
     handgun.setPosition(0,windowHight-75);
-    //weapondsMenu.emplace_back(handgun);
+
 
     rifle.setTexture(rifleTexture);
     rifle.setPosition(150,windowHight-75);
-    //weapondsMenu.emplace_back(rifle);
+
 
     shotgun.setTexture(shotgunTexture);
     shotgun.setPosition(300,windowHight-75);
-    //weapondsMenu.emplace_back(shotgun);
+
 
     sniperrifle.setTexture(sniperrifleTexture);
     sniperrifle.setPosition(450,windowHight-75);
-    //weapondsMenu.emplace_back(sniperrifle);
+
 
 
     background.setSize({windowWidth,75});
@@ -67,19 +67,24 @@ void Game::createObjects(){
     background.setPosition(0,windowHight-75);
     background.setOutlineColor(sf::Color::Black);
     background.setOutlineThickness(1);
-    //weapondsMenu.emplace_back(background);
+
 
     weapondBackground.setSize({150,75});
     weapondBackground.setFillColor(sf::Color::White);
     weapondBackground.setPosition(0,windowHight-75);
-    //weapondsMenu.emplace_back(weapondBackground);
+
 
     playerHP.setFont(font);
     playerHP.setCharacterSize(40);
     playerHP.setString("1000 HP");
     playerHP.setColor(sf::Color::Black);
     playerHP.setPosition(650,windowHight-50);
-    //weapondsMenu.emplace("playerHP", playerHP);
+
+    levelStr.setFont(font);
+    levelStr.setCharacterSize(30);
+    levelStr.setString("Lvl: 1");
+    levelStr.setColor(sf::Color::Black);
+    levelStr.setPosition(650,windowHight-80);
 }
 
 void Game::drawAndDisplay(){
@@ -99,6 +104,7 @@ void Game::drawAndDisplay(){
     window.draw(background);
     window.draw(weapondBackground);
     window.draw(playerHP);
+    window.draw(levelStr);
     window.draw(handgun);
     window.draw(rifle);
     window.draw(shotgun);
@@ -147,10 +153,30 @@ void Game::zombieRespawn(){
         if(player.getHealth()<1000){
             player.subtractHealth(-2, playerHP);
         }
-        if(counter < 10){
+        if(monsters.empty()){
+            counter = 0;
+            std::cout<<"level up"<<std::endl;
+            level++;
+            levelStr.setString("Lvl: " + std::to_string(level));
+        }
+        ///lvl 1
+        if(counter < 2){
             counter ++;
             monsters.emplace_back(Monster(monsterTexture, 3,(std::rand() % 6)+9, (std::rand() % 21)+90));
         }
+        if(counter < 2 && level == 2){
+            counter ++;
+            monsters.emplace_back(Monster(monsterTexture, 3,(std::rand() % 6)+9, (std::rand() % 21)+90));
+        }
+        if(counter < 2 && level == 3){
+            counter ++;
+            monsters.emplace_back(Monster(monsterTexture, 3,(std::rand() % 6)+9, (std::rand() % 21)+90));
+        }
+        if(level == 4){
+            std::cout<<"Win!!!!!"<<std::endl;
+        }
+
+
 
     }
 }

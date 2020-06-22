@@ -9,14 +9,14 @@ public:
     int getStrength();
     bool isBiting();
     void subtractHealth(int n,std::vector<Monster> &monsters, int index);
-    Monster(sf::Texture &texture);
+    Monster(sf::Texture &texture, float speed, int strength, int health);
 
     void moveing(sf::Vector2f playerPosition, std::vector<Monster> &monsters, int index);
 
 protected:
-    int strength = 13;//jednoczesnie promien zombie
-    float angle = 0;
-    float speed = 3;
+    int strength_ = 13;//jednoczesnie promien zombie
+    float angle_ = 0;
+    float speed_ = 3;
     int health_ = 100;
     bool biting_ = false;
 };

@@ -12,6 +12,7 @@ public:
     void drawAndDisplay();
     void events();
     void animation();
+    void zombieRespawn();
     void mainLoop();
 private:
     sf::RenderWindow window;

@@ -141,6 +141,14 @@ void Game::animation(){
 
         }
 }
+void Game::zombieRespawn(){
+    if(time-timer>1000 && counter < 10){
+        counter ++;
+        timer = time;
+        monsters.emplace_back(Monster(monsterTexture, 3,(std::rand() % 6)+9, (std::rand() % 21)+90));
+    }
+}
+////Contains animation, events and drawAndDisplay
 void Game::mainLoop(){
     while (window.isOpen()) {
 
@@ -151,12 +159,7 @@ void Game::mainLoop(){
 
         animation();
 
-        //zombie respawn
-        if(time-timer>1000 && counter < 10){
-            counter ++;
-            timer = time;
-            monsters.emplace_back(Monster(monsterTexture));
-        }
+        zombieRespawn();
 
         drawAndDisplay();
     }

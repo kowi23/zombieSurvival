@@ -1,6 +1,6 @@
 #include "monster.hpp"
 
-int Monster::getStrength(){return strength;}
+int Monster::getStrength(){return strength_;}
 
 void Monster::subtractHealth(int n,std::vector<Monster> &monsters, int index){
     health_ -= n;
@@ -13,11 +13,14 @@ bool Monster::isBiting(){
     return biting_ ;
 }
 
-Monster::Monster(sf::Texture &texture){
+Monster::Monster(sf::Texture &texture, float speed, int strength, int health){
+    speed_ = speed;
+    strength_ = strength;
+    health_ = health;
     this->setTexture(texture);///orginalnie 30x30
-    this->setScale(1/(15.f/strength),1/(15.f/strength));
-    this->setOrigin(strength,strength);
-    this->setPosition(700,-10);
+    this->setScale(1/(15.f/strength_),1/(15.f/strength_));
+    this->setOrigin(strength_,strength_);
+    this->setPosition((std::rand() % 100)+650,-10);
 
 }
 
@@ -30,18 +33,18 @@ void Monster::moveing(sf::Vector2f playerPosition, std::vector<Monster> &monster
         if(i == index){continue;}
         sf::Vector2f monster2Position = monsters[i].getPosition();
         //kolizja
-        if(cordsDistance(monsterPosition,monster2Position)<=strength+monsters[i].getStrength()){
-            angle = calculateAngle(monster2Position,monsterPosition);
-            this->move(std::cos((angle-90)*pi/180)*speed, std::sin((angle-90)*pi/180)*speed);
+        if(cordsDistance(monsterPosition,monster2Position)<=strength_+monsters[i].getStrength()){
+            angle_ = calculateAngle(monster2Position,monsterPosition);
+            this->move(std::cos((angle_-90)*pi/180)*speed_, std::sin((angle_-90)*pi/180)*speed_);
             break;
         }
     }
     if(!biting_){
         //zwykly ruch
         ////angle
-        angle = calculateAngle(monsterPosition,playerPosition);
+        angle_ = calculateAngle(monsterPosition,playerPosition);
         //bez wykrywania scian
-        this->move(std::cos((angle-90)*pi/180)*speed, std::sin((angle-90)*pi/180)*speed);
+        this->move(std::cos((angle_-90)*pi/180)*speed_, std::sin((angle_-90)*pi/180)*speed_);
         /*
         ///wykrywanie scian
         float speedX = std::cos((angle-90)*pi/180)*speed;
@@ -74,10 +77,10 @@ void Monster::moveing(sf::Vector2f playerPosition, std::vector<Monster> &monster
     }
 
     ////obrot
-    this->setRotation(angle);
+    this->setRotation(angle_);
 
     ///kolizja z graczem
-    if(cordsDistance(playerPosition,monsterPosition)<=strength+constPlayerRadius){
+    if(cordsDistance(playerPosition,monsterPosition)<=strength_+constPlayerRadius){
 
         biting_ = true;
     }else{

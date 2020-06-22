@@ -70,7 +70,7 @@ if(sf::Mouse::isButtonPressed(sf::Mouse::Left) && reload == 0){
         bullets.emplace_back(Bullet(bulletAngle,this->getPosition(),time, damage, bulletLife));
         if(changedWeapond_ == weapond::Shotgun){
             for (int i = 0; i < 5; i++){
-                bullets.emplace_back(Bullet(bulletAngle+(std::rand() % 121)-60,this->getPosition(),time, damage, bulletLife));
+                bullets.emplace_back(Bullet(bulletAngle+(std::rand() % 61)-30,this->getPosition(),time, damage, bulletLife));
             }
         }
         reload = time;

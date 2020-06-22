@@ -18,6 +18,7 @@ public:
     void changingWeapond(sf::Event event, sf::RectangleShape &weapondBackground);
     //getters
     float getSpeed();
+    int getHealth();
     float getAngle();
     int getRadius();
 

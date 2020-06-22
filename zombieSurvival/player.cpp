@@ -6,6 +6,7 @@ class Bullet;
 ///////GETTERS
 
 float Player::getSpeed(){return speed;};
+int Player::getHealth(){return health_;};
 float Player::getAngle(){return angle_;};
 int Player::getRadius(){return playerRadius;};
 void Player::subtractHealth(int n, sf::Text &playerHP){health_ -= n; playerHP.setString(std::to_string(health_)+" HP");}

@@ -142,10 +142,16 @@ void Game::animation(){
         }
 }
 void Game::zombieRespawn(){
-    if(time-timer>1000 && counter < 10){
-        counter ++;
+    if(time-timer>1000){
         timer = time;
-        monsters.emplace_back(Monster(monsterTexture, 3,(std::rand() % 6)+9, (std::rand() % 21)+90));
+        if(player.getHealth()<1000){
+            player.subtractHealth(-2, playerHP);
+        }
+        if(counter < 10){
+            counter ++;
+            monsters.emplace_back(Monster(monsterTexture, 3,(std::rand() % 6)+9, (std::rand() % 21)+90));
+        }
+
     }
 }
 ////Contains animation, events and drawAndDisplay

@@ -17,6 +17,24 @@ Player::Player(){
     this->setOrigin(13,21);
     this->setPosition(400,300);
 }
+bool Player::itemContact(sf::FloatRect itemBounds, itemType itemType){
+    if(this->getGlobalBounds().intersects(itemBounds)){
+        switch ( itemType )
+          {
+             case itemType::health:
+                std::cout<<"zycie"<<std::endl;
+                break;
+             case itemType::granade:
+                std::cout<<"granat"<<std::endl;
+                break;
+             default:
+                break;
+          }
+        return true;
+    }else{
+        return false;
+    }
+}
 ////////CHANGING WEAPOND
 void Player::changingWeapond(sf::Event event, sf::RectangleShape &weapondBackground){
     if (event.key.code == sf::Keyboard::Num1){

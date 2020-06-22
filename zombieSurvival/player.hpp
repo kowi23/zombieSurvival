@@ -18,6 +18,7 @@ public:
     int getRadius();
 
     Player();
+    bool itemContact(sf::FloatRect itemBounds, itemType itemType);
 
     void shooting(clock_t time, std::vector<Bullet> &bullets);
 

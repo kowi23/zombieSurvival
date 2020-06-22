@@ -130,10 +130,17 @@ void Game::events(){
      }
 }
 void Game::animation(){
-    ////animacja gracza
+        ////animacja gracza
         sf::Vector2f mousePosition = sf::Vector2f(sf::Mouse::getPosition(window));
         player.moveing(mousePosition);
         player.shooting(time,bullets);
+
+        ///kolizja gracz-przedmiot
+        for (int i = 0; i < items.size(); i++){
+            if(player.itemContact(items[i].getGlobalBounds(),items[i].getType())){
+                items.erase(items.begin()+i);
+            }
+        }
 
        ///animacja pociskow
         for (int i = 0; i < bullets.size(); i++){
@@ -150,7 +157,7 @@ void Game::animation(){
 
         }
 }
-///spawn zombies, hp regeneration, levels, items generation
+///spawn zombies, hp regeneration, levels, create items
 void Game::oneSecCounter(){
     if(time-timer>1000){
         timer = time;
@@ -159,7 +166,6 @@ void Game::oneSecCounter(){
         }
         if(monsters.empty()){
             counter = 0;
-            std::cout<<"level up"<<std::endl;
             level++;
             levelStr.setString("Lvl: " + std::to_string(level));
         }
@@ -168,18 +174,18 @@ void Game::oneSecCounter(){
             counter ++;
             monsters.emplace_back(Monster(monsterTexture, 1.5,(std::rand() % 6)+9, (std::rand() % 21)+90));
         }
-        if(counter < 2 && level == 2){
+        if(counter < 3 && level == 2){
             counter ++;
             monsters.emplace_back(Monster(monsterTexture, 1.5,(std::rand() % 6)+9, (std::rand() % 21)+90));
         }
-        if(counter < 2 && level == 3){
+        if(counter < 1 && level == 3){
             counter ++;
             monsters.emplace_back(Monster(monsterTexture, 1.5,(std::rand() % 6)+9, (std::rand() % 21)+90));
         }
         if(level == 4){
             std::cout<<"Win!!!!!"<<std::endl;
         }
-        switch ( std::rand() % 5 )
+        switch ( std::rand() % 21 )
           {
              case 0:
                 items.emplace_back(Item(playerTexture,itemType::health,sf::Vector2f((std::rand() % (windowWidth-50))+25,(std::rand() % (windowHight-125))+25)));

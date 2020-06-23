@@ -32,6 +32,7 @@ private:
     sf::Sprite rifle;
     sf::Sprite shotgun;
     sf::Sprite sniperrifle;
+    sf::Sprite granade;
     sf::RectangleShape background;
     sf::RectangleShape weapondBackground;
     sf::Text playerHP;
@@ -43,6 +44,7 @@ private:
     sf::Texture sniperrifleTexture;
     sf::Texture rifleTexture;
     sf::Texture handgunTexture;
+    sf::Texture granadeTexture;
     sf::Texture monsterTexture;
     sf::Texture playerTexture;
 };

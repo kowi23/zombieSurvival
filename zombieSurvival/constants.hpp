@@ -10,6 +10,7 @@ enum class weapond {
     Rifle,
     Shotgun,
     SniperRifle,
+    Granade,
 };
 enum class itemType {
     health,

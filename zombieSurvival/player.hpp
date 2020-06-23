@@ -20,16 +20,17 @@ public:
     Player();
     bool itemContact(sf::FloatRect itemBounds, itemType itemType);
 
-    void shooting(clock_t time, std::vector<Bullet> &bullets);
+    void shooting(clock_t time, std::vector<Bullet> &bullets, sf::RectangleShape &weapondBackground);
 
     void moveing(sf::Vector2f mousePosition);
 
 protected:
-    int playerRadius = constPlayerRadius;
+    int playerRadius_ = constPlayerRadius;
     float angle_;
-    float speed = 2.5;
+    float speed_ = 2.5;
     int gunSpeed_ = 700;//czas strzalu w ms
     int health_ = 1000;
     weapond changedWeapond_ = weapond::Handgun;
+    int granadeNum_ = 5;
 };
 #endif

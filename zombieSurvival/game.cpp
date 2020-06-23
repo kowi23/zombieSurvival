@@ -14,27 +14,31 @@ void Game::loadTextures(){
     ///TEXTURES
 
     if(!playerTexture.loadFromFile("texture/player.png")) {
-    std::cout<<"blad wczytywania tekstury gracza"<<std::endl;
+    std::cout<<"blad wczytywania tekstury player"<<std::endl;
     }
 
     if(!monsterTexture.loadFromFile("texture/monster.png")) {
-    std::cout<<"blad wczytywania tekstury gracza"<<std::endl;
+    std::cout<<"blad wczytywania tekstury monster"<<std::endl;
     }
 
     if(!handgunTexture.loadFromFile("texture/handgun.png")) {
-    std::cout<<"blad wczytywania tekstury gracza"<<std::endl;
+    std::cout<<"blad wczytywania tekstury handgun"<<std::endl;
     }
 
     if(!rifleTexture.loadFromFile("texture/rifle.png")) {
-    std::cout<<"blad wczytywania tekstury gracza"<<std::endl;
+    std::cout<<"blad wczytywania tekstury rifle"<<std::endl;
     }
 
     if(!shotgunTexture.loadFromFile("texture/shotgun.png")) {
-    std::cout<<"blad wczytywania tekstury gracza"<<std::endl;
+    std::cout<<"blad wczytywania tekstury shotgun"<<std::endl;
     }
 
     if(!sniperrifleTexture.loadFromFile("texture/sniperrifle.png")) {
-    std::cout<<"blad wczytywania tekstury gracza"<<std::endl;
+    std::cout<<"blad wczytywania tekstury sniperrifle"<<std::endl;
+    }
+
+    if(!granadeTexture.loadFromFile("texture/granade.png")) {
+    std::cout<<"blad wczytywania tekstury granade"<<std::endl;
     }
 }
 
@@ -60,6 +64,8 @@ void Game::createObjects(){
     sniperrifle.setTexture(sniperrifleTexture);
     sniperrifle.setPosition(450,windowHight-75);
 
+    granade.setTexture(granadeTexture);
+    granade.setPosition(600,windowHight-75);
 
 
     background.setSize({windowWidth,75});
@@ -78,13 +84,13 @@ void Game::createObjects(){
     playerHP.setCharacterSize(40);
     playerHP.setString("1000 HP");
     playerHP.setColor(sf::Color::Black);
-    playerHP.setPosition(650,windowHight-50);
+    playerHP.setPosition(800,windowHight-50);
 
     levelStr.setFont(font);
     levelStr.setCharacterSize(30);
     levelStr.setString("Lvl: 1");
     levelStr.setColor(sf::Color::Black);
-    levelStr.setPosition(650,windowHight-80);
+    levelStr.setPosition(800,windowHight-80);
 }
 
 void Game::drawAndDisplay(){
@@ -112,6 +118,7 @@ void Game::drawAndDisplay(){
     window.draw(rifle);
     window.draw(shotgun);
     window.draw(sniperrifle);
+    window.draw(granade);
 
     ///DISPLAY
     window.display();
@@ -133,19 +140,19 @@ void Game::animation(){
         ////animacja gracza
         sf::Vector2f mousePosition = sf::Vector2f(sf::Mouse::getPosition(window));
         player.moveing(mousePosition);
-        player.shooting(time,bullets);
+        player.shooting(time,bullets,weapondBackground);
 
         ///kolizja gracz-przedmiot
         for (int i = 0; i < items.size(); i++){
             if(player.itemContact(items[i].getGlobalBounds(),items[i].getType())){
                 items.erase(items.begin()+i);
+                player.subtractHealth(0,playerHP);//zeby zaktualizowac napis
             }
         }
 
        ///animacja pociskow
         for (int i = 0; i < bullets.size(); i++){
-            bullets[i].moveing(time, bullets, i);
-            bullets[i].hit(monsters, bullets, i);
+            bullets[i].moveing(time, bullets, i, monsters);
         }
         ///animacja potworow
         for (int i = 0; i < monsters.size(); i++){

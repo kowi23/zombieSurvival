@@ -6,8 +6,9 @@
 class Item : public sf::Sprite {
 public:
 
-    itemType getType();
     Item(sf::Texture &texture, itemType type, sf::Vector2f startPosition);
+
+        itemType getType();//zwraca typ przedmiotu
 
 protected:
     itemType type_;

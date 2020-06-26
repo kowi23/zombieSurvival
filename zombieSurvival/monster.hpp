@@ -4,14 +4,18 @@
 
 class Monster : public sf::Sprite {
 public:
+
+    Monster(sf::Texture &texture, float speed, int strength, int health, float difficultLevel);
+
+    //getters
     float getSpeed();
     float getAngle();
     int getStrength();
-    bool isBiting();
-    void subtractHealth(int n,std::vector<Monster> &monsters, int index);
-    Monster(sf::Texture &texture, float speed, int strength, int health, float difficultLevel);
+    bool isBiting();//zwraca czy potwor gryzie gracza
 
-    void moveing(sf::Vector2f playerPosition, std::vector<Monster> &monsters, int index);
+    void subtractHealth(int n,std::vector<Monster> &monsters, int index); //odejmuje zdrowie potworowi, gdy zdejdzie do 0 niszczy potwora
+
+    void moveing(sf::Vector2f playerPosition, std::vector<Monster> &monsters, int index);//ruch potwora, wykrywa kontakt z graczem  innymi potworami
 
 protected:
     int strength_ = 13;//jednoczesnie promien zombie

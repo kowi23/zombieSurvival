@@ -1,18 +1,19 @@
 #include "player.hpp"
 
-
-class Bullet;
-
-///////GETTERS
-
 float Player::getSpeed(){return speed_;}
+
 int Player::getHealth(){return health_;}
+
 float Player::getAngle(){return angle_;}
+
 int Player::getRadius(){return playerRadius_;}
+
 int Player::getGranadeNum(){return granadeNum_;}
 
-///SETTERS
+void Player::setSpeed(float speed){speed_ = speed;}
+
 void Player::subtractHealth(int n){health_ -= n;}
+
 void Player::changedWeapond(weapond weapond){changedWeapond_ = weapond;}
 std::set<itemType> Player::availableWeaponds(){return availableWeaponds_;}
 /////////CONSTRUCTOR
@@ -148,45 +149,50 @@ if(reload != 0){
 }
 /////////////MOVEING
 void Player::moveing(sf::Vector2f mousePosition){
-//player angle
-sf::Vector2f playerPosition = this->getPosition();
-angle_ = calculateAngle(playerPosition,mousePosition);
+    //player angle
+    sf::Vector2f playerPosition = this->getPosition();
+    angle_ = calculateAngle(playerPosition,mousePosition);
 
 
-//rotation
-this->setRotation(angle_);
+    //rotation
+    this->setRotation(angle_);
 
-//move
+    //move
+    float moveX = 0;
+    float moveY = 0;
+    if(fabs(mousePosition.x-playerPosition.x)>playerRadius_ || fabs(mousePosition.y-playerPosition.y)>playerRadius_){
 
-if(fabs(mousePosition.x-playerPosition.x)>playerRadius_ || fabs(mousePosition.y-playerPosition.y)>playerRadius_){
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+                moveX = std::cos((angle_-90)*pi/180)*speed_;
+                moveY = std::sin((angle_-90)*pi/180)*speed_;
+            }
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+                moveX = std::cos((angle_+90)*pi/180)*speed_;
+                moveY = std::sin((angle_+90)*pi/180)*speed_;
+            }
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+                moveX = std::cos((angle_)*pi/180)*speed_;
+                moveY = std::sin((angle_)*pi/180)*speed_;
+            }
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+                moveX = std::cos((angle_-180)*pi/180)*speed_;
+                moveY = std::sin((angle_-180)*pi/180)*speed_;
+            }
 
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-            this->move(std::cos((angle_-90)*pi/180)*speed_, std::sin((angle_-90)*pi/180)*speed_);
-        }
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-
-            this->move(std::cos((angle_+90)*pi/180)*speed_, std::sin((angle_+90)*pi/180)*speed_);
-        }
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-            this->move(std::cos(angle_*pi/180)*speed_, std::sin(angle_*pi/180)*speed_);
-        }
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-            this->move(std::cos((angle_-180)*pi/180)*speed_, std::sin((angle_-180)*pi/180)*speed_);
-        }
-
-}
-//walls
-if(playerPosition.x<playerRadius_){
-    this->setPosition(playerRadius_,playerPosition.y);
-}
-if(playerPosition.y<playerRadius_){
-    this->setPosition(playerPosition.x,playerRadius_);
-}
-if(playerPosition.y>windowHight-75-playerRadius_){
-    this->setPosition(playerPosition.x,windowHight-75-playerRadius_);
-}
-if(playerPosition.x>windowWidth-playerRadius_){
-    this->setPosition(windowWidth-playerRadius_,playerPosition.y);
-}
+    }
+    //walls
+    if(playerPosition.x<playerRadius_ && moveX<0){
+        moveX = 0;
+    }
+    if(playerPosition.y<playerRadius_ && moveY<0){
+        moveY = 0;
+    }
+    if(playerPosition.y>windowHight-75-playerRadius_ && moveY>0){
+        moveY = 0;
+    }
+    if(playerPosition.x>windowWidth-playerRadius_ && moveX>0){
+        moveX = 0;
+    }
+    this->move(moveX,moveY);
 
 }

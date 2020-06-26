@@ -374,6 +374,11 @@ void Game::menuAnimation(){
         startButton.setFillColor(sf::Color::Black);
         startButton.setOutlineThickness(5);
         if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
+                if(difficultLevel == 3){
+                    player.setSpeed(3.5);
+                }else{
+                    player.setSpeed(2.5);
+                }
                 state = State::Game;
         }
      }
@@ -495,7 +500,7 @@ void Game::oneSecCounter(){
             counter ++;
             monsters.emplace_back(Monster(monsterTexture, 2.2,(std::rand() % 9)+6, (std::rand() % 21)+90,difficultLevel));
         }
-        if(counter < 5 && level == 4){
+        if(counter < 5 && level == 6){
             //shotgun
             if(counter < 1){
                 items.emplace_back(Item(itemTexture,itemType::Shotgun,{windowWidth/2,windowHight/2-40}));

@@ -8,26 +8,33 @@
 
 class Player : public sf::Sprite {
 public:
-    std::set<itemType> availableWeaponds();
-    void subtractHealth(int n);
-    void changedWeapond(weapond weapond);
-    void changingWeapond(sf::Event event, sf::RectangleShape &weapondBackground);
+
+    Player();
+
     //getters
+    std::set<itemType> availableWeaponds();//zwraca odblokowane bronie
     float getSpeed();
     int getGranadeNum();
     int getHealth();
     float getAngle();
     int getRadius();
 
-    Player();
-    bool itemContact(sf::FloatRect itemBounds, itemType itemType);
+    void setSpeed(float speed);
 
-    void shooting(clock_t time, std::vector<Bullet> &bullets, sf::RectangleShape &weapondBackground);
+    void subtractHealth(int n);//odejmuje zycie gracza
 
-    void moveing(sf::Vector2f mousePosition);
+    void changedWeapond(weapond weapond); //zwraca wybrana przez gracza bron
+
+    void changingWeapond(sf::Event event, sf::RectangleShape &weapondBackground); //mechanizm zmiany broni
+
+    bool itemContact(sf::FloatRect itemBounds, itemType itemType);//kontakt i zdobycie przedmiotow, zwraca czy zniszczyc przedmiot
+
+    void shooting(clock_t time, std::vector<Bullet> &bullets, sf::RectangleShape &weapondBackground);//mechanizm strzelania
+
+    void moveing(sf::Vector2f mousePosition);//ruch
 
 protected:
-    std::set<itemType> availableWeaponds_;
+    std::set<itemType> availableWeaponds_;//kolekcja odblokowanych broni
     int playerRadius_ = constPlayerRadius;
     float angle_;
     float speed_ = 2.5;

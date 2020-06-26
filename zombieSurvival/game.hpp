@@ -21,6 +21,7 @@ public:
     void optionsAnimation();
     void drawOptions();
 private:
+    ///"GLOBAL" VARIABLES
     int difficultLevel = 2;
     sf::RenderWindow window;
     clock_t time;
@@ -36,7 +37,7 @@ private:
     std::vector<Boom> booms;
     sf::Sprite granadeBoom;
 
-    ///WEAPONDBAR
+    ///WEAPONDSBAR
     sf::Sprite handgun;
     sf::Sprite rifle;
     sf::Sprite shotgun;

@@ -4,6 +4,7 @@
 #include <bullet.hpp>
 #include <monster.hpp>
 #include <item.hpp>
+#include <boom.hpp>
 
 class Game{
 public:
@@ -29,6 +30,8 @@ private:
     std::vector<Bullet> bullets;
     std::vector<Monster> monsters;
     std::vector<Item> items;
+    std::vector<Boom> booms;
+    sf::Sprite granadeBoom;
 
     ///WEAPONDBAR
     sf::Sprite handgun;
@@ -36,7 +39,6 @@ private:
     sf::Sprite shotgun;
     sf::Sprite sniperrifle;
     sf::Sprite granade;
-    sf::Sprite granadeBoom;
     sf::RectangleShape background;
     sf::RectangleShape weapondBackground;
     sf::Text playerHP;

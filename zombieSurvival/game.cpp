@@ -40,6 +40,9 @@ void Game::loadTextures(){
     if(!granadeTexture.loadFromFile("texture/granade.png")) {
     std::cout<<"blad wczytywania tekstury granade"<<std::endl;
     }
+    if(!boomTexture.loadFromFile("texture/boom.png")) {
+    std::cout<<"blad wczytywania tekstury granade"<<std::endl;
+    }
 }
 
 void Game::createObjects(){
@@ -160,6 +163,9 @@ void Game::drawGame(){
     playerHP.setString(std::to_string(player.getHealth())+" HP");
     granadeStr.setString(std::to_string(player.getGranadeNum()));
     ///DRAW
+    for(const auto &boom : booms) {
+    window.draw(boom);
+    }
     for(const auto &bullet : bullets) {
             window.draw(bullet);
         }
@@ -277,7 +283,13 @@ void Game::gameAnimation(){
 
        ///animacja pociskow
         for (int i = 0; i < bullets.size(); i++){
-            bullets[i].moveing(time, bullets, i, monsters);
+            bullets[i].moveing(time, bullets, i, monsters, booms, boomTexture);
+        }
+        ///animacja wybuchu
+        for (int i = 0; i < booms.size(); i++){
+            if(booms[i].animate(time)){
+                booms.erase(booms.begin()+i);
+            }
         }
         ///animacja potworow
         for (int i = 0; i < monsters.size(); i++){

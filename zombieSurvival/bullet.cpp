@@ -27,7 +27,7 @@ Bullet::Bullet(double angle, sf::Vector2f startPosition, clock_t time){
     speed_ = 15;
 }
 
-void Bullet::moveing(clock_t time, std::vector<Bullet> &bullets, int index, std::vector<Monster> &monsters){
+void Bullet::moveing(clock_t time, std::vector<Bullet> &bullets, int index, std::vector<Monster> &monsters, std::vector<Boom> &booms, sf::Texture &boomTexture){
 
 ///move
     this->move(std::cos((angle_-90)*pi/180)*speed_, std::sin((angle_-90)*pi/180)*speed_);
@@ -58,6 +58,7 @@ void Bullet::moveing(clock_t time, std::vector<Bullet> &bullets, int index, std:
 ///bullet life
     if(time-startTime_>life_){
             if(isGranade_){
+             booms.emplace_back(Boom(boomTexture,time,this->getPosition()));
              this->granadeBoom(monsters);
             }
             bullets.erase(bullets.begin()+index);

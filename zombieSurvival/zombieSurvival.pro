@@ -13,6 +13,7 @@ CONFIG(debug, debug|release){
 }
 
 SOURCES += \
+        boom.cpp \
         bullet.cpp \
         game.cpp \
         item.cpp \
@@ -22,6 +23,7 @@ SOURCES += \
         player.cpp
 
 HEADERS += \
+    boom.hpp \
     bullet.hpp \
     constants.hpp \
     game.hpp \

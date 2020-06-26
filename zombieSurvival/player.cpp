@@ -14,7 +14,7 @@ int Player::getGranadeNum(){return granadeNum_;}
 ///SETTERS
 void Player::subtractHealth(int n){health_ -= n;}
 void Player::changedWeapond(weapond weapond){changedWeapond_ = weapond;}
-
+std::set<itemType> Player::availableWeaponds(){return availableWeaponds_;}
 /////////CONSTRUCTOR
 Player::Player(){
     this->setOrigin(13,21);
@@ -24,15 +24,23 @@ bool Player::itemContact(sf::FloatRect itemBounds, itemType itemType){
     if(this->getGlobalBounds().intersects(itemBounds)){
         switch ( itemType )
           {
-             case itemType::health:
+             case itemType::Health:
                 health_ +=200;
                 if(health_>1000){
                     health_ = 1000;
                 }
                 break;
-             case itemType::granade:
+             case itemType::Granade:
                 granadeNum_++;
-                std::cout<<"granat"<<std::endl;
+                break;
+             case itemType::Rifle:
+                availableWeaponds_.emplace(itemType::Rifle);
+                break;
+             case itemType::Shotgun:
+                availableWeaponds_.emplace(itemType::Shotgun);
+                break;
+             case itemType::SniperRifle:
+                availableWeaponds_.emplace(itemType::SniperRifle);
                 break;
              default:
                 break;
@@ -52,19 +60,25 @@ void Player::changingWeapond(sf::Event event, sf::RectangleShape &weapondBackgro
             weapondBackground.setPosition(0,windowHight-75);
             break;
          case sf::Keyboard::Num2:
-            changedWeapond_ = weapond::Rifle;
-            gunSpeed_ = 150;
-            weapondBackground.setPosition(150,windowHight-75);
+            if(availableWeaponds_.find(itemType::Rifle)!=availableWeaponds_.end()){
+                changedWeapond_ = weapond::Rifle;
+                gunSpeed_ = 150;
+                weapondBackground.setPosition(150,windowHight-75);
+            }
             break;
          case sf::Keyboard::Num3:
-            changedWeapond_ = weapond::Shotgun;
-            gunSpeed_ = 700;
-            weapondBackground.setPosition(300,windowHight-75);
+            if(availableWeaponds_.find(itemType::Shotgun)!=availableWeaponds_.end()){
+                changedWeapond_ = weapond::Shotgun;
+                gunSpeed_ = 700;
+                weapondBackground.setPosition(300,windowHight-75);
+             }
             break;
          case sf::Keyboard::Num4:
-            changedWeapond_ = weapond::SniperRifle;
-            gunSpeed_ = 900;
-            weapondBackground.setPosition(450,windowHight-75);
+            if(availableWeaponds_.find(itemType::SniperRifle)!=availableWeaponds_.end()){
+                changedWeapond_ = weapond::SniperRifle;
+                gunSpeed_ = 900;
+                weapondBackground.setPosition(450,windowHight-75);
+             }
             break;
          case sf::Keyboard::Num5:
             if(granadeNum_>0){

@@ -1,6 +1,7 @@
 #ifndef constants_hpp
 #define constants_hpp
 #include <cmath>
+#include <set>
 #include <iostream>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
@@ -14,10 +15,11 @@ enum class weapond {
 };
 
 enum class itemType {
-    health,
-    granade,
+    Health,
+    Granade,
     Shotgun,
     SniperRifle,
+    Rifle,
 };
 enum class State {
     Menu,

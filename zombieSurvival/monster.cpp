@@ -13,10 +13,13 @@ bool Monster::isBiting(){
     return biting_ ;
 }
 
-Monster::Monster(sf::Texture &texture, float speed, int strength, int health){
-    speed_ = speed;
+Monster::Monster(sf::Texture &texture, float speed, int strength, int health, float difficultLevel){
+
+    speed_ = speed*(difficultLevel/2);
     strength_ = strength;
-    health_ = health;
+    health_ = health*(difficultLevel/2);
+
+
     this->setTexture(texture);///orginalnie 30x30
     this->setScale(1/(15.f/strength_),1/(15.f/strength_));
     this->setOrigin(strength_,strength_);
@@ -74,6 +77,8 @@ void Monster::moveing(sf::Vector2f playerPosition, std::vector<Monster> &monster
         this->move(speedX,speedY);
         */
 
+    }else{
+        this->move((std::rand() % 3)-1,(std::rand() % 3)-1);
     }
 
     ////obrot

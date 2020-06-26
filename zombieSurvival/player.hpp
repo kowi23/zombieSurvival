@@ -8,6 +8,7 @@
 
 class Player : public sf::Sprite {
 public:
+    std::set<itemType> availableWeaponds();
     void subtractHealth(int n);
     void changedWeapond(weapond weapond);
     void changingWeapond(sf::Event event, sf::RectangleShape &weapondBackground);
@@ -26,12 +27,13 @@ public:
     void moveing(sf::Vector2f mousePosition);
 
 protected:
+    std::set<itemType> availableWeaponds_;
     int playerRadius_ = constPlayerRadius;
     float angle_;
     float speed_ = 2.5;
     int gunSpeed_ = 700;//czas strzalu w ms
     int health_ = 1000;
     weapond changedWeapond_ = weapond::Handgun;
-    int granadeNum_ = 5;
+    int granadeNum_ = 1;
 };
 #endif

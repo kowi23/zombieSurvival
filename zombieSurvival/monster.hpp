@@ -9,7 +9,7 @@ public:
     int getStrength();
     bool isBiting();
     void subtractHealth(int n,std::vector<Monster> &monsters, int index);
-    Monster(sf::Texture &texture, float speed, int strength, int health);
+    Monster(sf::Texture &texture, float speed, int strength, int health, float difficultLevel);
 
     void moveing(sf::Vector2f playerPosition, std::vector<Monster> &monsters, int index);
 

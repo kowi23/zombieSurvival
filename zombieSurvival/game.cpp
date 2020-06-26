@@ -41,7 +41,10 @@ void Game::loadTextures(){
     std::cout<<"blad wczytywania tekstury granade"<<std::endl;
     }
     if(!boomTexture.loadFromFile("texture/boom.png")) {
-    std::cout<<"blad wczytywania tekstury granade"<<std::endl;
+    std::cout<<"blad wczytywania tekstury boom"<<std::endl;
+    }
+    if(!itemTexture.loadFromFile("texture/item.png")) {
+    std::cout<<"blad wczytywania tekstury item"<<std::endl;
     }
 }
 
@@ -82,6 +85,9 @@ void Game::createObjects(){
     weapondBackground.setSize({150,75});
     weapondBackground.setFillColor(sf::Color::White);
     weapondBackground.setPosition(0,windowHight-75);
+
+    blockBackground.setSize({150,75});
+    blockBackground.setFillColor(sf::Color(100, 100, 100));
 
 
     playerHP.setFont(font);
@@ -154,6 +160,58 @@ void Game::createObjects(){
         exitStr.setColor(sf::Color::Black);
         exitStr.setOrigin(45,30);
         exitStr.setPosition(700,700);
+
+   ////OPTIONS CREATE
+        //BACK button
+            backButton.setSize({150,80});
+            backButton.setFillColor(sf::Color::White);
+            backButton.setOrigin(75,40);
+            backButton.setPosition(245, 700);
+            backButton.setOutlineColor(sf::Color::White);
+        //back string
+            backStr.setFont(font);
+            backStr.setString("Back");
+            backStr.setCharacterSize(50);
+            backStr.setStyle(sf::Text::Bold);
+            backStr.setColor(sf::Color::Black);
+            backStr.setOrigin(60,30);
+            backStr.setPosition(245,700);
+         //difficult button
+            difficultButton.setSize({220,80});
+            difficultButton.setFillColor(sf::Color::White);
+            difficultButton.setOrigin(110,40);
+            difficultButton.setPosition(280, 550);
+            difficultButton.setOutlineColor(sf::Color::White);
+        //difficult string
+            difficultStr.setFont(font);
+            difficultStr.setString("Difficult");
+            difficultStr.setCharacterSize(50);
+            difficultStr.setStyle(sf::Text::Bold);
+            difficultStr.setColor(sf::Color::Black);
+            difficultStr.setOrigin(95,30);
+            difficultStr.setPosition(280,550);
+
+            ////difficult balls
+            b1.setRadius(25);
+            b1.setFillColor(sf::Color::White);
+            b1.setOrigin(25,25);
+            b1.setOutlineColor(sf::Color::White);
+            b1.setOutlineThickness(5);
+            b1.setPosition(435, 550);
+
+            b2.setRadius(25);
+            b2.setFillColor(sf::Color::White);
+            b2.setOrigin(25,25);
+            b2.setOutlineColor(sf::Color::White);
+            b2.setOutlineThickness(5);
+            b2.setPosition(505, 550);
+
+            b3.setRadius(25);
+            b3.setFillColor(sf::Color::Black);
+            b3.setOrigin(25,25);
+            b3.setOutlineColor(sf::Color::White);
+            b3.setOutlineThickness(5);
+            b3.setPosition(575, 550);
 }
 
 void Game::drawGame(){
@@ -179,6 +237,20 @@ void Game::drawGame(){
     window.draw(player);
     ///DRAW WEAPOND MENU
     window.draw(background);
+    ///ZABLOKOWANA BRON
+    std::set<itemType> availableWeaponds = player.availableWeaponds();
+    if(availableWeaponds.find(itemType::Rifle) == availableWeaponds.end()){
+        blockBackground.setPosition(150,windowHight-75);
+        window.draw(blockBackground);
+    }
+    if(availableWeaponds.find(itemType::Shotgun) == availableWeaponds.end()){
+        blockBackground.setPosition(300,windowHight-75);
+        window.draw(blockBackground);
+    }
+    if(availableWeaponds.find(itemType::SniperRifle) == availableWeaponds.end()){
+        blockBackground.setPosition(450,windowHight-75);
+        window.draw(blockBackground);
+    }
     window.draw(weapondBackground);
     window.draw(playerHP);
     window.draw(levelStr);
@@ -189,6 +261,7 @@ void Game::drawGame(){
     window.draw(sniperrifle);
     window.draw(granade);
 }
+
 void Game::drawMenu(){
     ///CLEAR
     window.clear(sf::Color::Black);
@@ -201,6 +274,76 @@ void Game::drawMenu(){
     window.draw(exitButton);
     window.draw(exitStr);
 }
+
+void Game::optionsAnimation(){
+    ///MOUSE POS
+    sf::Vector2i mousePos = sf::Mouse::getPosition(window);
+    ///EVENT
+    sf::Event event;
+    while (window.pollEvent(event)) {
+        // "close requested" event: we close the window
+        if (event.type == sf::Event::Closed){
+            window.close();
+         }
+        ///changing difficult level
+        if (event.type == sf::Event::MouseButtonPressed){
+            if (event.mouseButton.button == sf::Mouse::Left){
+                if(mousePos.x>170 && mousePos.x<390 && mousePos.y<590  && mousePos.y>510){
+                    if(difficultLevel == 1){
+                        difficultLevel = 2;
+                        b2.setFillColor(sf::Color::White);
+                    }else if(difficultLevel == 2){
+                        difficultLevel = 3;
+                        b3.setFillColor(sf::Color::White);
+                    }else{
+                        difficultLevel = 1;
+                        b2.setFillColor(sf::Color::Black);
+                        b3.setFillColor(sf::Color::Black);
+                    }
+                }
+            }
+        }
+     }
+    ////RESET BUTTONS
+    backStr.setColor(sf::Color::Black);
+    backButton.setFillColor(sf::Color::White);
+    backButton.setOutlineThickness(0);
+    difficultStr.setColor(sf::Color::Black);
+    difficultButton.setFillColor(sf::Color::White);
+    difficultButton.setOutlineThickness(0);
+
+
+
+    ///BACK BUTTON
+    if(mousePos.x>170 && mousePos.x<320 && mousePos.y<740  && mousePos.y>660){
+            backStr.setColor(sf::Color::White);
+            backButton.setFillColor(sf::Color::Black);
+            backButton.setOutlineThickness(5);
+            if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
+               state = State::Menu;
+            }
+     }
+    /////////difficult BUTTON color swap
+    if(mousePos.x>170 && mousePos.x<390 && mousePos.y<590  && mousePos.y>510){
+         difficultStr.setColor(sf::Color::White);
+         difficultButton.setFillColor(sf::Color::Black);
+         difficultButton.setOutlineThickness(5);
+    }
+}
+
+void Game::drawOptions(){
+    ///CLEAR
+    window.clear(sf::Color::Black);
+    //DRAW
+    window.draw(backButton);
+    window.draw(backStr);
+    window.draw(difficultButton);
+    window.draw(difficultStr);
+    window.draw(b1);
+    window.draw(b2);
+    window.draw(b3);
+}
+
 void Game::menuAnimation(){
     ///EVENT
     sf::Event event;
@@ -268,6 +411,7 @@ void Game::eventsGame(){
         }
      }
 }
+
 void Game::gameAnimation(){
         ////animacja gracza
         sf::Vector2f mousePosition = sf::Vector2f(sf::Mouse::getPosition(window));
@@ -301,8 +445,10 @@ void Game::gameAnimation(){
 
         }
 }
+
 ///spawn zombies, hp regeneration, levels, create items
 void Game::oneSecCounter(){
+
     if(time-timer>1000){
         timer = time;
         if(player.getHealth()<1000){
@@ -314,28 +460,58 @@ void Game::oneSecCounter(){
             levelStr.setString("Lvl: " + std::to_string(level));
         }
         ///levels
-        if(counter < 2 && level == 1){
+        if(counter < 4 && level == 1){
             counter ++;
-            monsters.emplace_back(Monster(monsterTexture, 1.5,(std::rand() % 6)+9, (std::rand() % 21)+90));
+            monsters.emplace_back(Monster(monsterTexture, 1.5,(std::rand() % 6)+9, (std::rand() % 21)+90,difficultLevel));
         }
-        if(counter < 3 && level == 2){
+        if(counter < 5 && level == 2){
             counter ++;
-            monsters.emplace_back(Monster(monsterTexture, 1.5,(std::rand() % 6)+9, (std::rand() % 21)+90));
+            monsters.emplace_back(Monster(monsterTexture, 1.5,(std::rand() % 6)+12, (std::rand() % 21)+90,difficultLevel));
         }
-        if(counter < 1 && level == 3){
+        if(counter < 2 && level == 3){
+            //BOSS 1
+            if(counter < 1){
+                items.emplace_back(Item(itemTexture,itemType::Granade,sf::Vector2f((std::rand() % (windowWidth-50))+25,(std::rand() % (windowHight-125))+25)));
+                items.emplace_back(Item(itemTexture,itemType::Granade,sf::Vector2f((std::rand() % (windowWidth-50))+25,(std::rand() % (windowHight-125))+25)));
+                monsters.emplace_back(Monster(monsterTexture, 1.3,(std::rand() % 6)+18, (std::rand() % 21)+490,difficultLevel));
+            }
             counter ++;
-            monsters.emplace_back(Monster(monsterTexture, 1.5,(std::rand() % 6)+9, (std::rand() % 21)+90));
+            monsters.emplace_back(Monster(monsterTexture, 2.2,(std::rand() % 6)+6, (std::rand() % 21)+90,difficultLevel));
         }
-        if(level == 4){
-            std::cout<<"Win!!!!!"<<std::endl;
+        if(counter < 5 && level == 4){
+            //rifle
+            if(counter < 1){
+                items.emplace_back(Item(itemTexture,itemType::Rifle,{windowWidth/2,windowHight/2-40}));
+            }
+            counter ++;
+            monsters.emplace_back(Monster(monsterTexture, 2.2,(std::rand() % 6)+6, (std::rand() % 21)+90,difficultLevel));
         }
+        if(counter < 6 && level == 5){
+            //BOSS 2
+            if(counter < 1){
+                monsters.emplace_back(Monster(monsterTexture, 1.7,(std::rand() % 6)+24, (std::rand() % 21)+990,difficultLevel));
+                items.emplace_back(Item(itemTexture,itemType::Granade,sf::Vector2f((std::rand() % (windowWidth-50))+25,(std::rand() % (windowHight-125))+25)));
+            }
+            counter ++;
+            monsters.emplace_back(Monster(monsterTexture, 2.2,(std::rand() % 9)+6, (std::rand() % 21)+90,difficultLevel));
+        }
+        if(counter < 5 && level == 4){
+            //shotgun
+            if(counter < 1){
+                items.emplace_back(Item(itemTexture,itemType::Shotgun,{windowWidth/2,windowHight/2-40}));
+            }
+            counter ++;
+            monsters.emplace_back(Monster(monsterTexture, 2.2,(std::rand() % 9)+6, (std::rand() % 21)+90,difficultLevel));
+        }
+
+        ///GENEROWANIE LOSOWYCH ITEMOW NA MAPIE
         switch ( std::rand() % 21 )
           {
              case 0:
-                items.emplace_back(Item(playerTexture,itemType::health,sf::Vector2f((std::rand() % (windowWidth-50))+25,(std::rand() % (windowHight-125))+25)));
+                items.emplace_back(Item(itemTexture,itemType::Health,sf::Vector2f((std::rand() % (windowWidth-50))+25,(std::rand() % (windowHight-125))+25)));
                 break;
              case 1:
-                items.emplace_back(Item(playerTexture,itemType::granade,sf::Vector2f((std::rand() % (windowWidth-50))+25,(std::rand() % (windowHight-125))+25)));
+                items.emplace_back(Item(itemTexture,itemType::Granade,sf::Vector2f((std::rand() % (windowWidth-50))+25,(std::rand() % (windowHight-125))+25)));
                 break;
              default:
                 break;
@@ -344,7 +520,8 @@ void Game::oneSecCounter(){
 
     }
 }
-////Contains animation, events, drawAndDisplay and oneSecCounter
+
+
 void Game::mainLoop(){
     while (window.isOpen()) {
 
@@ -364,7 +541,8 @@ void Game::mainLoop(){
                drawMenu();
                break;
             case State::Options:
-
+                optionsAnimation();
+                drawOptions();
                break;
             default:
                break;

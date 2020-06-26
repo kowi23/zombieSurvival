@@ -18,10 +18,13 @@ public:
     void gameAnimation();
     void oneSecCounter();
     void mainLoop();
+    void optionsAnimation();
+    void drawOptions();
 private:
+    int difficultLevel = 2;
     sf::RenderWindow window;
     clock_t time;
-    clock_t timer;
+    clock_t timer = 0;
     int counter = 0;
     int level = 0;
     State state = State::Menu;
@@ -40,6 +43,7 @@ private:
     sf::Sprite sniperrifle;
     sf::Sprite granade;
     sf::RectangleShape background;
+    sf::RectangleShape blockBackground;
     sf::RectangleShape weapondBackground;
     sf::Text playerHP;
     sf::Text levelStr;
@@ -54,8 +58,18 @@ private:
     sf::Text exitStr;
     sf::RectangleShape exitButton;
 
+    ///OPTIONS
+    sf::RectangleShape backButton;
+    sf::Text backStr;
+    sf::RectangleShape difficultButton;
+    sf::Text difficultStr;
+    sf::CircleShape b1;
+    sf::CircleShape b2;
+    sf::CircleShape b3;
+
     ///TEXTURES
     sf::Font font;
+    sf::Texture itemTexture;
     sf::Texture shotgunTexture;
     sf::Texture sniperrifleTexture;
     sf::Texture rifleTexture;

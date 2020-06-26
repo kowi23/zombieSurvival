@@ -13,6 +13,8 @@ Bullet::Bullet(double angle, sf::Vector2f startPosition, clock_t time, int damag
    damage_ = damage;
    life_ = life;
 }
+
+///granade
 Bullet::Bullet(double angle, sf::Vector2f startPosition, clock_t time){
     bulletRadius_ = 8;
     this->setRadius(bulletRadius_);
@@ -77,6 +79,7 @@ void Bullet::granadeBoom(std::vector<Monster> &monsters){
         }
     }
 }
+
 void Bullet::hit(std::vector<Monster> &monsters, std::vector<Bullet> &bullets, int index){
 
     sf::Vector2f bulletPosition = this->getPosition();

@@ -58,29 +58,23 @@ void Game::createObjects(){
     handgun.setTexture(handgunTexture);
     handgun.setPosition(0,windowHight-75);
 
-
     rifle.setTexture(rifleTexture);
     rifle.setPosition(150,windowHight-75);
-
 
     shotgun.setTexture(shotgunTexture);
     shotgun.setPosition(300,windowHight-75);
 
-
     sniperrifle.setTexture(sniperrifleTexture);
     sniperrifle.setPosition(450,windowHight-75);
 
-
     granade.setTexture(granadeTexture);
     granade.setPosition(600,windowHight-75);
-
 
     background.setSize({windowWidth,75});
     background.setFillColor(sf::Color(230, 230, 230));
     background.setPosition(0,windowHight-75);
     background.setOutlineColor(sf::Color::Black);
     background.setOutlineThickness(1);
-
 
     weapondBackground.setSize({150,75});
     weapondBackground.setFillColor(sf::Color::White);
@@ -89,20 +83,17 @@ void Game::createObjects(){
     blockBackground.setSize({150,75});
     blockBackground.setFillColor(sf::Color(100, 100, 100));
 
-
     playerHP.setFont(font);
     playerHP.setCharacterSize(40);
     playerHP.setString("1000 HP");
     playerHP.setColor(sf::Color::Black);
     playerHP.setPosition(800,windowHight-50);
 
-
     levelStr.setFont(font);
     levelStr.setCharacterSize(30);
     levelStr.setString("Lvl: 1");
     levelStr.setColor(sf::Color::Black);
     levelStr.setPosition(800,windowHight-80);
-
 
     granadeStr.setFont(font);
     granadeStr.setCharacterSize(22);
@@ -212,6 +203,18 @@ void Game::createObjects(){
             b3.setOutlineColor(sf::Color::White);
             b3.setOutlineThickness(5);
             b3.setPosition(575, 550);
+
+      //END CREATE
+            endBackground.setSize({1400,900});
+            endBackground.setFillColor(sf::Color(0,0,0,180));
+            endBackground.setPosition(0, 0);
+
+            endStr.setPosition(700,450);
+            endStr.setFont(font);
+            endStr.setCharacterSize(100);
+            endStr.setStyle(sf::Text::Bold);
+            endStr.setColor(sf::Color::Yellow);
+
 }
 
 void Game::drawGame(){
@@ -344,6 +347,14 @@ void Game::drawOptions(){
     window.draw(b3);
 }
 
+void Game::drawEnd(){
+
+    drawGame();
+    window.draw(endBackground);
+    window.draw(endStr);
+
+}
+
 void Game::menuAnimation(){
     ///EVENT
     sf::Event event;
@@ -417,6 +428,22 @@ void Game::eventsGame(){
      }
 }
 
+void Game::endAnimation(){
+    ///EVENT
+    sf::Event event;
+    while (window.pollEvent(event)) {
+        // "close requested" event: we close the window
+        if (event.type == sf::Event::Closed){
+            window.close();
+         }
+     }
+    ///endTimer
+    static int timer = time;
+    if(time-timer>5000){
+        window.close();
+    }
+}
+
 void Game::gameAnimation(){
         ////animacja gracza
         sf::Vector2f mousePosition = sf::Vector2f(sf::Mouse::getPosition(window));
@@ -449,6 +476,18 @@ void Game::gameAnimation(){
             }
 
         }
+
+        //sprawdzanie konca gry
+        if(player.getHealth()<1){
+            endStr.setString("Game Over!");
+            endStr.setOrigin(250,100);
+            state = State::End;
+        }
+        if(level > 10){
+            endStr.setString("You Win!");
+            endStr.setOrigin(200,100);
+            state = State::End;
+        }
 }
 
 ///spawn zombies, hp regeneration, levels, create items
@@ -464,7 +503,7 @@ void Game::oneSecCounter(){
             level++;
             levelStr.setString("Lvl: " + std::to_string(level));
         }
-        ///levels
+        ///LEVELS
         if(counter < 4 && level == 1){
             counter ++;
             monsters.emplace_back(Monster(monsterTexture, 1.5,(std::rand() % 6)+9, (std::rand() % 21)+90,difficultLevel));
@@ -476,7 +515,6 @@ void Game::oneSecCounter(){
         if(counter < 2 && level == 3){
             //BOSS 1
             if(counter < 1){
-                items.emplace_back(Item(itemTexture,itemType::Granade,sf::Vector2f((std::rand() % (windowWidth-50))+25,(std::rand() % (windowHight-125))+25)));
                 items.emplace_back(Item(itemTexture,itemType::Granade,sf::Vector2f((std::rand() % (windowWidth-50))+25,(std::rand() % (windowHight-125))+25)));
                 monsters.emplace_back(Monster(monsterTexture, 1.3,(std::rand() % 6)+18, (std::rand() % 21)+490,difficultLevel));
             }
@@ -491,10 +529,10 @@ void Game::oneSecCounter(){
             counter ++;
             monsters.emplace_back(Monster(monsterTexture, 2.2,(std::rand() % 6)+6, (std::rand() % 21)+90,difficultLevel));
         }
-        if(counter < 6 && level == 5){
+        if(counter < 4 && level == 5){
             //BOSS 2
             if(counter < 1){
-                monsters.emplace_back(Monster(monsterTexture, 1.7,(std::rand() % 6)+24, (std::rand() % 21)+990,difficultLevel));
+                monsters.emplace_back(Monster(monsterTexture, 1.9,(std::rand() % 6)+24, (std::rand() % 21)+990,difficultLevel));
                 items.emplace_back(Item(itemTexture,itemType::Granade,sf::Vector2f((std::rand() % (windowWidth-50))+25,(std::rand() % (windowHight-125))+25)));
             }
             counter ++;
@@ -506,16 +544,46 @@ void Game::oneSecCounter(){
                 items.emplace_back(Item(itemTexture,itemType::Shotgun,{windowWidth/2,windowHight/2-40}));
             }
             counter ++;
-            monsters.emplace_back(Monster(monsterTexture, 2.2,(std::rand() % 9)+6, (std::rand() % 21)+90,difficultLevel));
+            monsters.emplace_back(Monster(monsterTexture, 2.2,(std::rand() % 12)+6, (std::rand() % 21)+240,difficultLevel));
         }
-
+        if(counter < 10 && level == 7){
+            counter ++;
+            monsters.emplace_back(Monster(monsterTexture, 1.9,(std::rand() % 14)+6, (std::rand() % 21)+190,difficultLevel));
+        }
+        if(counter < 5 && level == 8){
+            //BOSS 3
+            if(counter < 1){
+                monsters.emplace_back(Monster(monsterTexture, 1.3,(std::rand() % 6)+24, (std::rand() % 21)+2990,difficultLevel));
+                items.emplace_back(Item(itemTexture,itemType::Granade,sf::Vector2f((std::rand() % (windowWidth-50))+25,(std::rand() % (windowHight-125))+25)));
+            }
+            counter ++;
+            monsters.emplace_back(Monster(monsterTexture, 2.2,(std::rand() % 12)+6, (std::rand() % 21)+300,difficultLevel));
+        }
+        if(counter < 8 && level == 9){
+            //sniperRifle
+            if(counter < 1){
+                items.emplace_back(Item(itemTexture,itemType::SniperRifle,{windowWidth/2,windowHight/2-40}));
+            }
+            counter ++;
+            monsters.emplace_back(Monster(monsterTexture, 2.0,(std::rand() % 12)+6, (std::rand() % 21)+300,difficultLevel));
+        }
+        if(counter < 10 && level == 10){
+            ///BOSS 4
+            if(counter < 3){
+                monsters.emplace_back(Monster(monsterTexture, 1.7,(std::rand() % 6)+24, (std::rand() % 21)+1990,difficultLevel));
+            }
+            counter ++;
+            monsters.emplace_back(Monster(monsterTexture, 2.2,(std::rand() % 12)+6, (std::rand() % 21)+200,difficultLevel));
+        }
         ///GENEROWANIE LOSOWYCH ITEMOW NA MAPIE
-        switch ( std::rand() % 21 )
+        switch ( std::rand() % 61 )
           {
              case 0:
                 items.emplace_back(Item(itemTexture,itemType::Health,sf::Vector2f((std::rand() % (windowWidth-50))+25,(std::rand() % (windowHight-125))+25)));
                 break;
              case 1:
+             case 2:
+             case 3:
                 items.emplace_back(Item(itemTexture,itemType::Granade,sf::Vector2f((std::rand() % (windowWidth-50))+25,(std::rand() % (windowHight-125))+25)));
                 break;
              default:
@@ -548,6 +616,10 @@ void Game::mainLoop(){
             case State::Options:
                 optionsAnimation();
                 drawOptions();
+               break;
+           case State::End:
+               endAnimation();
+               drawEnd();
                break;
             default:
                break;

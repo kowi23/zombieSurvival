@@ -9,6 +9,7 @@ void Monster::subtractHealth(int n,std::vector<Monster> &monsters, int index){
         monsters.erase(monsters.begin()+index);
     }
 }
+
 bool Monster::isBiting(){
     return biting_ ;
 }
@@ -31,6 +32,22 @@ void Monster::moveing(sf::Vector2f playerPosition, std::vector<Monster> &monster
 
     sf::Vector2f monsterPosition = this->getPosition();
 
+    float moveX = 0;
+    float moveY = 0;
+
+    ////OBROT I KAT W STRONE GRACZA
+    angle_ = calculateAngle(monsterPosition,playerPosition);
+    this->setRotation(angle_);
+    ///ZWYKLY RUCH
+    if(!biting_){
+        //RUCH W STRONE GRACZA
+        moveX = std::cos((angle_-90)*pi/180)*speed_;
+        moveY = std::sin((angle_-90)*pi/180)*speed_;
+
+    }else{
+        moveX = (std::rand() % 3)-1;
+        moveY = (std::rand() % 3)-1;
+    }
     ///kolizja miedzy zombie
     for (int i = 0; i < monsters.size(); i++){
         if(i == index){continue;}
@@ -38,55 +55,31 @@ void Monster::moveing(sf::Vector2f playerPosition, std::vector<Monster> &monster
         //kolizja
         if(cordsDistance(monsterPosition,monster2Position)<=strength_+monsters[i].getStrength()){
             angle_ = calculateAngle(monster2Position,monsterPosition);
-            this->move(std::cos((angle_-90)*pi/180)*speed_, std::sin((angle_-90)*pi/180)*speed_);
+            moveX = std::cos((angle_-45)*pi/180)*speed_;
+            moveY = std::sin((angle_-45)*pi/180)*speed_;
             break;
         }
     }
-    if(!biting_){
-        //zwykly ruch
-        ////angle
-        angle_ = calculateAngle(monsterPosition,playerPosition);
-        //bez wykrywania scian
-        this->move(std::cos((angle_-90)*pi/180)*speed_, std::sin((angle_-90)*pi/180)*speed_);
-        /*
-        ///wykrywanie scian
-        float speedX = std::cos((angle-90)*pi/180)*speed;
-        float speedY = std::sin((angle-90)*pi/180)*speed;
-        if(monsterPosition.x>=windowWidth){
-            if(speedX>0){
-                std::cout<<"prawo"<<std::endl;
-                speedX = 0;
-            }
-        }else if(monsterPosition.x<=0){
-            if(speedX<0){
-                std::cout<<"lewo"<<std::endl;
-                speedX = 0;
-            }
-        }else if(monsterPosition.y>=windowHight-75){
-            if(speedY>0){
-                std::cout<<"dol"<<std::endl;
-                speedY = 0;
-            }
-        }else if(monsterPosition.y<=0){
-            std::cout<<"gora" <<speedY<<std::endl;
-            if(speedY<0){
-                std::cout<<"gora2"<<std::endl;
-                speedY = 0;
-            }
-        }
-        this->move(speedX,speedY);
-        */
 
-    }else{
-        this->move((std::rand() % 3)-1,(std::rand() % 3)-1);
+    ///kolizja ze sciana
+    if(monsterPosition.x<strength_ && moveX<0){
+        moveX = 0;
+    }
+    if(monsterPosition.y<strength_ && moveY<0){
+        moveY = 0;
+    }
+    if(monsterPosition.y>windowHight-75-strength_ && moveY>0){
+        moveY = 0;
+    }
+    if(monsterPosition.x>windowWidth-strength_ && moveX>0){
+        moveX = 0;
     }
 
-    ////obrot
-    this->setRotation(angle_);
 
+    ///move
+    this->move(moveX,moveY);
     ///kolizja z graczem
     if(cordsDistance(playerPosition,monsterPosition)<=strength_+constPlayerRadius){
-
         biting_ = true;
     }else{
         biting_ = false;

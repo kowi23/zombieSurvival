@@ -12,6 +12,7 @@ float calculateAngle(sf::Vector2f firstPos, sf::Vector2f secondPos){
     }
     return angle;
 }
+
 float cordsDistance(sf::Vector2f firstPos, sf::Vector2f secondPos){
     return pow(pow(firstPos.x- secondPos.x, 2) + pow(firstPos.y - secondPos.y, 2), 0.5);
 }

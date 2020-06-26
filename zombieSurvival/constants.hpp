@@ -25,6 +25,7 @@ enum class State {
     Menu,
     Game,
     Options,
+    End,
 };
 const float pi = M_PI;
 const int windowHight = 900;

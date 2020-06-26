@@ -15,12 +15,14 @@ void Player::setSpeed(float speed){speed_ = speed;}
 void Player::subtractHealth(int n){health_ -= n;}
 
 void Player::changedWeapond(weapond weapond){changedWeapond_ = weapond;}
+
 std::set<itemType> Player::availableWeaponds(){return availableWeaponds_;}
-/////////CONSTRUCTOR
+
 Player::Player(){
     this->setOrigin(13,21);
     this->setPosition(400,300);
 }
+
 bool Player::itemContact(sf::FloatRect itemBounds, itemType itemType){
     if(this->getGlobalBounds().intersects(itemBounds)){
         switch ( itemType )
@@ -51,7 +53,7 @@ bool Player::itemContact(sf::FloatRect itemBounds, itemType itemType){
         return false;
     }
 }
-////////CHANGING WEAPOND
+
 void Player::changingWeapond(sf::Event event, sf::RectangleShape &weapondBackground){
     switch ( event.key.code )
       {
@@ -93,10 +95,11 @@ void Player::changingWeapond(sf::Event event, sf::RectangleShape &weapondBackgro
       }
 
 }
-////////SHOOTING
+
 void Player::shooting(clock_t time, std::vector<Bullet> &bullets,  sf::RectangleShape &weapondBackground){
 static double reload = 0;
 
+//strzal w zaleznosci od typu broni
 if(sf::Mouse::isButtonPressed(sf::Mouse::Left) && reload == 0){
         int damage;
         int bulletLife;
@@ -147,7 +150,7 @@ if(reload != 0){
      }
 }
 }
-/////////////MOVEING
+
 void Player::moveing(sf::Vector2f mousePosition){
     //player angle
     sf::Vector2f playerPosition = this->getPosition();

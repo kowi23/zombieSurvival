@@ -20,6 +20,8 @@ public:
     void mainLoop();
     void optionsAnimation();
     void drawOptions();
+    void drawEnd();
+    void endAnimation();
 private:
     ///"GLOBAL" VARIABLES
     int difficultLevel = 2;
@@ -67,6 +69,10 @@ private:
     sf::CircleShape b1;
     sf::CircleShape b2;
     sf::CircleShape b3;
+
+    ///END
+    sf::RectangleShape endBackground;
+    sf::Text endStr;
 
     ///TEXTURES
     sf::Font font;

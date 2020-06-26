@@ -8,11 +8,12 @@
 
 class Player : public sf::Sprite {
 public:
-    void subtractHealth(int n, sf::Text &playerHP);
+    void subtractHealth(int n);
     void changedWeapond(weapond weapond);
     void changingWeapond(sf::Event event, sf::RectangleShape &weapondBackground);
     //getters
     float getSpeed();
+    int getGranadeNum();
     int getHealth();
     float getAngle();
     int getRadius();

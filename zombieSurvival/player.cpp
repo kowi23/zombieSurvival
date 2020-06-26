@@ -5,13 +5,14 @@ class Bullet;
 
 ///////GETTERS
 
-float Player::getSpeed(){return speed_;};
-int Player::getHealth(){return health_;};
-float Player::getAngle(){return angle_;};
-int Player::getRadius(){return playerRadius_;};
+float Player::getSpeed(){return speed_;}
+int Player::getHealth(){return health_;}
+float Player::getAngle(){return angle_;}
+int Player::getRadius(){return playerRadius_;}
+int Player::getGranadeNum(){return granadeNum_;}
 
 ///SETTERS
-void Player::subtractHealth(int n, sf::Text &playerHP){health_ -= n; playerHP.setString(std::to_string(health_)+" HP");}
+void Player::subtractHealth(int n){health_ -= n;}
 void Player::changedWeapond(weapond weapond){changedWeapond_ = weapond;}
 
 /////////CONSTRUCTOR

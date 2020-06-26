@@ -12,11 +12,17 @@ enum class weapond {
     SniperRifle,
     Granade,
 };
+
 enum class itemType {
     health,
     granade,
     Shotgun,
     SniperRifle,
+};
+enum class State {
+    Menu,
+    Game,
+    Options,
 };
 const float pi = M_PI;
 const int windowHight = 900;

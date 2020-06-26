@@ -10,9 +10,11 @@ public:
     Game();
     void loadTextures();
     void createObjects();
-    void drawAndDisplay();
-    void events();
-    void animation();
+    void drawGame();
+    void drawMenu();
+    void menuAnimation();
+    void eventsGame();
+    void gameAnimation();
     void oneSecCounter();
     void mainLoop();
 private:
@@ -21,6 +23,7 @@ private:
     clock_t timer;
     int counter = 0;
     int level = 0;
+    State state = State::Menu;
     ///MAIN GAME OBJECTS
     Player player;
     std::vector<Bullet> bullets;
@@ -33,10 +36,21 @@ private:
     sf::Sprite shotgun;
     sf::Sprite sniperrifle;
     sf::Sprite granade;
+    sf::Sprite granadeBoom;
     sf::RectangleShape background;
     sf::RectangleShape weapondBackground;
     sf::Text playerHP;
     sf::Text levelStr;
+    sf::Text granadeStr;
+
+    ///MAIN MENU
+    sf::Text logo;
+    sf::RectangleShape startButton;
+    sf::Text startStr;
+    sf::Text optionsStr;
+    sf::RectangleShape optionsButton;
+    sf::Text exitStr;
+    sf::RectangleShape exitButton;
 
     ///TEXTURES
     sf::Font font;
@@ -45,6 +59,7 @@ private:
     sf::Texture rifleTexture;
     sf::Texture handgunTexture;
     sf::Texture granadeTexture;
+    sf::Texture boomTexture;
     sf::Texture monsterTexture;
     sf::Texture playerTexture;
 };
